@@ -16,7 +16,7 @@ class Lattice:
 
         self._gen = 0
         rows, cols = shape
-        self.rows, self.cols = self.shape = abs(int(rows)), abs(int(cols))
+        self._rows, self._cols = self.shape = abs(int(rows)), abs(int(cols))
         self._step = self.rows * self.cols
         self._temp = abs(temp)
         self._field = float(field)
@@ -38,6 +38,18 @@ class Lattice:
         self.mag_mom = self.lattice_mag_mom()
         self.energy_hist = [self.energy]
         self.mag_mom_hist = [self.mag_mom]
+
+    @property
+    def rows(self):
+        return self._rows
+
+    @property
+    def cols(self):
+        return self._cols
+
+    @property
+    def step(self):
+        return self._step
 
     @property
     def temp(self):
@@ -99,7 +111,7 @@ class Lattice:
         self.mag_mom_hist.clear()
         self._gen += 1
 
-        for _ in range(self._step):
+        for _ in range(self.step):
             # Choose a random spin0 in the lattice
             i = rng.integers(self.rows)
             j = rng.integers(self.cols)
