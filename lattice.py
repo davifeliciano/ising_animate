@@ -43,6 +43,9 @@ class Lattice:
         self.energy_hist = [self.energy]
         self.mag_mom_hist = [self.mag_mom]
 
+    def __repr__(self) -> str:
+        return f"Lattice(shape={self.shape.__str__()}, temp={self.temp}, j={self.j.__str__()}, field={self.field})"
+
     @property
     def rows(self):
         return self._rows
