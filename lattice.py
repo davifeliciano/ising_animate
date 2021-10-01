@@ -18,7 +18,11 @@ class Lattice:
         rows, cols = shape
         self._rows, self._cols = self.shape = abs(int(rows)), abs(int(cols))
         self._step = self.rows * self.cols
-        self._temp = abs(temp)
+
+        temp = abs(float(temp))
+        if temp:
+            self._temp = abs(temp)
+
         self._field = float(field)
 
         try:
@@ -57,7 +61,9 @@ class Lattice:
 
     @temp.setter
     def temp(self, value):
-        self._temp = abs(value)
+        temp = abs(value)
+        if temp:
+            self._temp = abs(float(value))
 
     @property
     def field(self):
@@ -143,10 +149,10 @@ if __name__ == "__main__":
                 end="\n\n",
             )
             print(
-                f"Mean Energy = {lattice.mean_energy()}",
-                f"Magnetization = {lattice.magnet()}",
-                f"Specific Heat = {lattice.specific_heat()}",
-                f"Susceptibility = {lattice.susceptibility()}",
+                f"Mean Energy = {lattice.mean_energy():.2f}",
+                f"Magnetization = {lattice.magnet():.2f}",
+                f"Specific Heat = {lattice.specific_heat():.2f}",
+                f"Susceptibility = {lattice.susceptibility():.2f}",
                 sep="\n",
                 end="\n\n",
             )
