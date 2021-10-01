@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import Normalize
+from matplotlib.ticker import StrMethodFormatter
 
 from lattice import Lattice
+
+plt.rcParams.update({"axes.formatter.limits": (-1, 2), "figure.autolayout": True})
 
 
 class Ising:
@@ -16,10 +19,11 @@ class Ising:
     ) -> None:
 
         self.lattice = Lattice(shape, temp, j, field, init_state)
-        self.mean_energy_hist = [self.lattice.mean_energy()]
-        self.magnet_hist = [self.lattice.magnet()]
-        self.specific_heat_hist = [self.lattice.specific_heat()]
-        self.susceptibility_hist = [self.lattice.susceptibility()]
+        self.gen = 0
+        self.mean_energy_hist = []
+        self.magnet_hist = []
+        self.specific_heat_hist = []
+        self.susceptibility_hist = []
 
     def update(self):
         self.mean_energy_hist.append(self.lattice.mean_energy())
@@ -27,6 +31,7 @@ class Ising:
         self.specific_heat_hist.append(self.lattice.specific_heat())
         self.susceptibility_hist.append(self.lattice.susceptibility())
         self.lattice.update()
+        self.gen += 1
 
 
 class AnimatedIsing(Ising):
@@ -37,6 +42,9 @@ class AnimatedIsing(Ising):
         j=(1, 1),
         field=0,
         init_state="random",
+        time_series=False,
+        interval=100,
+        frames=60,
     ) -> None:
 
         super().__init__(
@@ -46,17 +54,96 @@ class AnimatedIsing(Ising):
             field=field,
             init_state=init_state,
         )
-        self.fig, self.ax = plt.subplots()
+
+        self.time_series = time_series
+        self.time_hist = []
+
+        if self.time_series:
+            self.fig, self.ax = plt.subplots(3, 2)
+            self.fig.set_size_inches(10.8, 7.2)
+
+            # Merging axis [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[0:2, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[0:2, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+
+            self.__update_animation = self.__update_ani_time_series
+            self.__init_animation = self.__init_ani_time_series
+        else:
+            self.fig, self.ax = plt.subplots()
+            self.__update_animation = self.__update_ani_no_time_series
+            self.__init_animation = self.__init_ani_no_time_series
+
+        self.interval = interval
+        self.frames = frames
+
         self.animation = FuncAnimation(
-            self.fig, self.update_animation, interval=100, save_count=60
+            self.fig,
+            func=self.__update_animation,
+            init_func=self.__init_animation,
+            interval=self.interval,
+            save_count=self.frames,
         )
 
-    def update_animation(self, frame):
+        self.axes_labels = {
+            "time": r"$t$",
+            "energy": r"$\langle E \rangle$",
+            "magnet": r"$\langle \mu \rangle$",
+            "specific_heat": r"$C$",
+            "susceptibility": r"$\chi$",
+        }
+
+    def update(self):
+        super().update()
+        self.time_hist.append(self.gen * self.interval / 1000)
+
+    def __set_axes(self):
+        for ax in self.ax[:-1]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter("{x:.1e}"))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels["time"],
+            )
+            ax.grid(linestyle=":")
+
+        self.ax[0].set(ylabel=self.axes_labels["energy"])
+        self.ax[1].set(ylabel=self.axes_labels["magnet"])
+        self.ax[2].set(ylabel=self.axes_labels["specific_heat"])
+        self.ax[3].set(ylabel=self.axes_labels["susceptibility"])
+        self.ax[4].set(ylabel="i", xlabel="j")
+
+    def __init_ani_time_series(self):
+        self.ax[4].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.__set_axes()
+        self.update()
+
+    def __update_ani_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.__set_axes()
+        self.ax[0].plot(self.time_hist, self.mean_energy_hist)
+        self.ax[1].plot(self.time_hist, self.magnet_hist)
+        self.ax[2].plot(self.time_hist, self.specific_heat_hist)
+        self.ax[3].plot(self.time_hist, self.susceptibility_hist)
+        self.ax[4].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.update()
+
+    def __init_ani_no_time_series(self):
+        self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.update()
+
+    def __update_ani_no_time_series(self, frame):
         self.ax.clear()
         self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.update()
 
 
 if __name__ == "__main__":
-    ising = AnimatedIsing(shape=(128, 128))
+    ising = AnimatedIsing(shape=(128, 128), temp=5.0, init_state="down")
+    ising_time_series = AnimatedIsing(shape=(128, 128), temp=1.5, time_series=True)
     ising.animation.save("images/test.gif")
+    ising_time_series.animation.save("images/test_time_series.gif")
