@@ -18,6 +18,14 @@ class Ising:
         init_state="random",
     ) -> None:
 
+        # Saving given init_state to include in __str__
+        if init_state == "up":
+            self._init_state = "up"
+        elif init_state == "down":
+            self._init_state = "down"
+        else:
+            self._init_state = "random"
+
         self.lattice = Lattice(shape, temp, j, field, init_state)
         self._energy = self.lattice.energy
         self._mag_mom = self.lattice.mag_mom
@@ -35,7 +43,14 @@ class Ising:
         )
 
     def __str__(self) -> str:
-        return f"Ising Model with Temperature {self.lattice.temp} and Field {self.lattice.field}"
+        return (
+            f"Ising Model with Temperature {self.lattice.temp} and Field {self.lattice.field}, "
+            + f"starting with {self.init_state} spins"
+        )
+
+    @property
+    def init_state(self):
+        return self._init_state
 
     @property
     def gen(self):
