@@ -124,9 +124,11 @@ ani_ising = ising.AnimatedIsing(
 
 
 def to_string(seconds: float) -> str:
-    minutes = int(seconds / 60)
-    seconds = int(seconds % 60)
-    return f"{minutes} minutes and {seconds} seconds"
+    if seconds >= 60:
+        minutes = int(seconds / 60)
+        seconds = int(seconds % 60)
+        return f"{minutes} minutes and {seconds} seconds"
+    return f"{seconds:.2f} seconds"
 
 
 # Saving animation and computing rendering time
