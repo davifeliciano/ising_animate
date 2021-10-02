@@ -5,7 +5,7 @@ from matplotlib.ticker import StrMethodFormatter
 
 from lattice import Lattice
 
-plt.rcParams.update({"axes.formatter.limits": (-1, 2), "figure.autolayout": True})
+plt.rcParams.update({"figure.autolayout": True})
 
 
 class Ising:
@@ -19,7 +19,6 @@ class Ising:
     ) -> None:
 
         self.lattice = Lattice(shape, temp, j, field, init_state)
-        self._gen = 0
         self._energy = self.lattice.energy
         self._mag_mom = self.lattice.mag_mom
         self.mean_energy_hist = []
@@ -39,6 +38,10 @@ class Ising:
         return f"Ising Model with Temperature {self.lattice.temp} and Field {self.lattice.field}"
 
     @property
+    def gen(self):
+        return self.lattice._gen
+
+    @property
     def energy(self):
         return self.lattice.energy
 
@@ -52,7 +55,6 @@ class Ising:
         self.specific_heat_hist.append(self.lattice.specific_heat())
         self.susceptibility_hist.append(self.lattice.susceptibility())
         self.lattice.update()
-        self._gen += 1
 
 
 class AnimatedIsing(Ising):
@@ -133,7 +135,7 @@ class AnimatedIsing(Ising):
 
     @property
     def time(self):
-        return self._gen * self.interval / 1000
+        return self.gen * self.interval / 1000
 
     def update(self):
         super().update()
@@ -164,10 +166,10 @@ class AnimatedIsing(Ising):
             ax.clear()
 
         self.__set_axes()
-        self.ax[0].plot(self.time_hist, self.mean_energy_hist)
-        self.ax[1].plot(self.time_hist, self.magnet_hist)
-        self.ax[2].plot(self.time_hist, self.specific_heat_hist)
-        self.ax[3].plot(self.time_hist, self.susceptibility_hist)
+        self.ax[0].plot(self.time_hist, self.mean_energy_hist, color="purple")
+        self.ax[1].plot(self.time_hist, self.magnet_hist, color="purple")
+        self.ax[2].plot(self.time_hist, self.specific_heat_hist, color="purple")
+        self.ax[3].plot(self.time_hist, self.susceptibility_hist, color="purple")
         self.ax[4].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.update()
 
