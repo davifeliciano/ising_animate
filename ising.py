@@ -57,6 +57,22 @@ class Ising:
         return self.lattice._gen
 
     @property
+    def temp(self):
+        return self.lattice.temp
+
+    @temp.setter
+    def temp(self, value):
+        self.lattice.temp = value
+
+    @property
+    def field(self):
+        return self.lattice.field
+
+    @field.setter
+    def field(self, value):
+        self.lattice.field = value
+
+    @property
     def energy(self):
         return self.lattice.energy
 
