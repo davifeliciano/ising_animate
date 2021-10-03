@@ -7,7 +7,7 @@ rng = default_rng()
 class Lattice:
     def __init__(
         self,
-        shape=(30, 30),
+        shape=(128, 128),
         temp=2.0,
         j=(1.0, 1.0),
         field=0.0,
@@ -17,7 +17,6 @@ class Lattice:
         self._gen = 0
         rows, cols = shape
         self._rows, self._cols = self.shape = abs(int(rows)), abs(int(cols))
-        self._step = self.rows * self.cols
 
         temp = abs(float(temp))
         if temp:
@@ -55,8 +54,8 @@ class Lattice:
         return self._cols
 
     @property
-    def step(self):
-        return self._step
+    def spins(self):
+        return self.rows * self.cols
 
     @property
     def temp(self):
@@ -103,8 +102,9 @@ class Lattice:
         return self.state.sum()
 
     def magnet(self):
-        """Returns the magnetization of the lattice, i. e. the average of mag_mom_hist"""
-        return np.mean(self.mag_mom_hist)
+        """Returns the magnetization of the lattice,
+        i. e. the average of mag_mom_hist per spin"""
+        return np.mean(self.mag_mom_hist) / self.spins
 
     def specific_heat(self):
         """Returns the specific heat of the lattice"""
@@ -120,7 +120,7 @@ class Lattice:
         self.mag_mom_hist.clear()
         self._gen += 1
 
-        for _ in range(self.step):
+        for _ in range(self.spins):
             # Choose a random spin0 in the lattice
             i = rng.integers(self.rows)
             j = rng.integers(self.cols)
