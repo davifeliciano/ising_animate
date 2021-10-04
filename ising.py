@@ -11,7 +11,7 @@ plt.rcParams.update({"figure.autolayout": True})
 class Ising:
     def __init__(
         self,
-        shape=(30, 30),
+        shape=(128, 128),
         temp=2.0,
         j=(1.0, 1.0),
         field=0.0,
@@ -91,7 +91,7 @@ class Ising:
 class AnimatedIsing(Ising):
     def __init__(
         self,
-        shape=(30, 30),
+        shape=(128, 128),
         temp=2,
         j=(1, 1),
         field=0,
