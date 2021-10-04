@@ -132,8 +132,9 @@ class Lattice:
                 self.state[i, j] *= -1
                 self.energy += delta_energy
                 self.mag_mom += 2 * self.state[i, j]
-                self.energy_hist.append(self.energy)
-                self.mag_mom_hist.append(self.mag_mom)
+
+            self.energy_hist.append(self.energy)
+            self.mag_mom_hist.append(self.mag_mom)
 
 
 if __name__ == "__main__":
