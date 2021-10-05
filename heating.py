@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from ising import Ising
+import timer
 
 
 @dataclass
@@ -35,18 +36,26 @@ class HeatingIsing(Ising):
 
     def update(self):
         super().update()
-        # Increase temperature in 0.05 every 20 generations
-        if not self.gen % 20:
-            self.temp += 0.05
+        # Increase temperature in 0.1 every 60 generations
+        if not self.gen % 60:
+            self.temp += 0.1
             self.plot.temp_data.append(self.temp)
-            self.plot.specific_heat_data.append(np.mean(self.specific_heat_hist[-5:]))
-            self.plot.magnet_data.append(np.mean(self.magnet_hist[-5:]))
+            self.plot.specific_heat_data.append(np.mean(self.specific_heat_hist[-10:]))
+            self.plot.magnet_data.append(np.mean(self.magnet_hist[-10:]))
 
 
 def update_ising(ising):
     while ising.temp <= 4.0:
         ising.update()
     return ising
+
+
+@timer.timer
+def heatup_isings(isings):
+    with mp.Pool() as pool:
+        print(f"Heating up {isings_number} Ising Models! This may take some time...")
+        isings = pool.map(update_ising, isings)
+    return isings
 
 
 if __name__ == "__main__":
@@ -56,11 +65,7 @@ if __name__ == "__main__":
 
     print("Spawning procecesses...")
     mp.set_start_method("spawn", force=True)
-    with mp.Pool() as pool:
-        print(f"Heating up {isings_number} Ising Models! This may take some time...")
-        isings = pool.map(update_ising, isings)
-
-    print("Done!")
+    isings = heatup_isings(isings)
 
     temp_data = isings[0].plot.temp_data
     specific_heat_data = (
@@ -90,4 +95,5 @@ if __name__ == "__main__":
     ax[0].plot(temp_data, specific_heat_data, "ro", ms=3.0)
     ax[1].set(xlabel=r"$T$", ylabel=r"$\langle \mu \rangle$")
     ax[1].plot(temp_data, magnet_data, "ro", ms=3.0)
+
     plt.show()

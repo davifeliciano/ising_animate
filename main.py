@@ -3,6 +3,7 @@ import time
 from matplotlib.animation import PillowWriter
 
 import ising
+import timer
 
 # Creating and parsing the cl arguments
 parser = argparse.ArgumentParser(
@@ -117,24 +118,20 @@ interval = args.interval
 frames = args.frames
 output = args.output
 
-# Creating an AnimatedIsing instance with the given options
-ani_ising = ising.AnimatedIsing(
-    shape, temp, j_value, field, init_state, time_series, interval, frames
-)
+
+@timer.timer
+def main():
+    # Creating an AnimatedIsing instance with the given options
+    ani_ising = ising.AnimatedIsing(
+        shape, temp, j_value, field, init_state, time_series, interval, frames
+    )
+
+    # Saving animation and computing rendering time
+    print("Rendering animation...")
+    fps = 1000 / interval
+    ani_ising.animation.save(output, writer=PillowWriter(fps))
 
 
-def to_string(seconds: float) -> str:
-    if seconds >= 60:
-        minutes = int(seconds / 60)
-        seconds = int(seconds % 60)
-        return f"{minutes} minutes and {seconds} seconds"
-    return f"{seconds:.2f} seconds"
-
-
-# Saving animation and computing rendering time
-print("Rendering animation...")
-start = time.time()
-fps = 1000 / interval
-ani_ising.animation.save(output, writer=PillowWriter(fps))
-total = time.time() - start
-print(f"Done in {to_string(total)}! Animation saved as {output}.")
+if __name__ == "__main__":
+    main()
+    print(f"Animation saved as {output}")
