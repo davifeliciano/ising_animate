@@ -104,7 +104,7 @@ class Lattice:
     def magnet(self):
         """Returns the magnetization of the lattice,
         i. e. the average of mag_mom_hist per spin"""
-        return np.mean(self.mag_mom_hist) / self.spins
+        return np.mean(self.mag_mom_hist)
 
     def specific_heat(self):
         """Returns the specific heat of the lattice"""

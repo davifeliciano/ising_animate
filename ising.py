@@ -49,6 +49,10 @@ class Ising:
         )
 
     @property
+    def spins(self):
+        return self.lattice.spins
+
+    @property
     def init_state(self):
         return self._init_state
 
@@ -82,8 +86,8 @@ class Ising:
 
     def update(self):
         self.mean_energy_hist.append(self.lattice.mean_energy())
-        self.magnet_hist.append(self.lattice.magnet())
-        self.specific_heat_hist.append(self.lattice.specific_heat())
+        self.magnet_hist.append(self.lattice.magnet() / self.spins)
+        self.specific_heat_hist.append(self.lattice.specific_heat() / self.spins)
         self.susceptibility_hist.append(self.lattice.susceptibility())
         self.lattice.update()
 
@@ -110,7 +114,6 @@ class AnimatedIsing(Ising):
         )
 
         self.time_series = bool(time_series)
-        self._time = 0
         self.time_hist = []
 
         if self.time_series:
@@ -148,8 +151,8 @@ class AnimatedIsing(Ising):
         self.axes_labels = {
             "time": r"$t$",
             "energy": r"$\langle E \rangle$",
-            "magnet": r"$\langle \mu \rangle$",
-            "specific_heat": r"$C$",
+            "magnet": r"$\langle \mu \rangle / n$",
+            "specific_heat": r"$C / n$",
             "susceptibility": r"$\chi$",
         }
 
