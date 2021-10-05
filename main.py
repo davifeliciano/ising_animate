@@ -1,5 +1,5 @@
+import os
 import argparse
-import time
 from matplotlib.animation import PillowWriter
 
 import ising
@@ -117,6 +117,10 @@ time_series = args.time_series
 interval = args.interval
 frames = args.frames
 output = args.output
+
+extension = os.path.splitext(output)[1]
+if extension.lower() != ".gif":
+    output += ".gif"
 
 
 @timer.timer
