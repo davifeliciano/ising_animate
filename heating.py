@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 import multiprocessing as mp
+import sys
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.ndimage import gaussian_filter1d
 
 from ising import Ising
 import timer
+
+
+plt.rcParams.update({"figure.autolayout": True, "figure.figsize": [9.6, 4.8]})
 
 
 @dataclass
@@ -45,34 +50,43 @@ class HeatingIsing(Ising):
 
 
 def update_ising(ising):
-    while ising.temp <= 4.0:
-        ising.update()
-    return ising
+    try:
+        while ising.temp <= 4.0:
+            ising.update()
+        return ising
+    # Ignore KeyboardInterrupt on a child process
+    except KeyboardInterrupt:
+        pass
 
 
 @timer.timer
-def heatup_isings(isings):
-    with mp.Pool() as pool:
-        print(f"Heating up {isings_number} Ising Models! This may take some time...")
-        isings = pool.map(update_ising, isings)
-    return isings
+def heatup_isings(ising_list: list[HeatingIsing], processes: int) -> list[HeatingIsing]:
+    print(f"Heating up {processes} Ising Models. This may take some time...")
+    with mp.Pool(processes) as pool:
+        try:
+            return pool.map(update_ising, ising_list)
+        except KeyboardInterrupt:
+            # Kill the pool when KeyboardInterrupt is raised
+            pool.terminate()
+            pool.join()
+            sys.exit(1)
 
 
 if __name__ == "__main__":
-    # List with ising models to average over
-    isings_number = 8
-    isings = [HeatingIsing(shape=(64, 64), temp=1.0) for _ in range(isings_number)]
+    # Number of processes to use based on cpu_count of the machine
+    processes = int(mp.cpu_count() / 2)
+    ising_list = [HeatingIsing(shape=(32, 32), temp=1.0) for _ in range(processes)]
 
-    print("Spawning procecesses...")
-    mp.set_start_method("spawn", force=True)
-    isings = heatup_isings(isings)
+    print(f"Initializing process pool with {processes} processes.")
+    mp.set_start_method("spawn")
+    ising_list = heatup_isings(ising_list, processes)
 
-    temp_data = isings[0].plot.temp_data
+    temp_data = ising_list[0].plot.temp_data
     specific_heat_data = (
-        np.mean([ising.plot.specific_heat_data for ising in isings], axis=0)
-        / isings[0].lattice.spins
+        np.mean([ising.plot.specific_heat_data for ising in ising_list], axis=0)
+        / ising_list[0].lattice.spins
     )
-    magnet_data = np.mean([ising.plot.magnet_data for ising in isings], axis=0)
+    magnet_data = np.mean([ising.plot.magnet_data for ising in ising_list], axis=0)
 
     # Creating a dataframe with heating data
     result = pd.DataFrame(
@@ -87,13 +101,31 @@ if __name__ == "__main__":
         float_format="%.3f",
     )
 
-    print(f"Results saved at {outfile}")
+    print(f"Results saved as {outfile}")
 
-    fig, ax = plt.subplots(1, 2)
+    # Ploting heating data
+    fig, axes = plt.subplots(1, 2)
 
-    ax[0].set(xlabel=r"$T$", ylabel=r"$C / N$")
-    ax[0].plot(temp_data, specific_heat_data, "ro", ms=3.0)
-    ax[1].set(xlabel=r"$T$", ylabel=r"$\langle \mu \rangle$")
-    ax[1].plot(temp_data, magnet_data, "ro", ms=3.0)
+    specific_heat_filtered = gaussian_filter1d(specific_heat_data, sigma=2.0)
+    magnet_filtered = gaussian_filter1d(magnet_data, sigma=2.0)
 
+    fig.suptitle(
+        "Specific Heat per spin and Magnetization in terms of Temperature\n"
+        + f"Average of {processes} Ising Models"
+    )
+
+    axes[0].set(xlabel=r"$T$", ylabel=r"$C / N$")
+    axes[0].plot(temp_data, specific_heat_data, "ro", ms=3.0)
+    axes[0].plot(temp_data, specific_heat_filtered, lw=1.7, zorder=-1)
+
+    axes[1].set(xlabel=r"$T$", ylabel=r"$\langle \mu \rangle$")
+    axes[1].plot(temp_data, magnet_data, "ro", ms=3.0)
+    axes[1].plot(temp_data, magnet_filtered, lw=1.7, zorder=-1)
+
+    for ax in axes:
+        ax.grid(linestyle=":")
+
+    fig_outfile = "images/heating.png"
+    print(f"Figure saved as {fig_outfile}")
+    fig.savefig(fig_outfile)
     plt.show()
