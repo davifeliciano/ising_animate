@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 import multiprocessing as mp
 import sys
 
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter1d
@@ -87,21 +86,6 @@ if __name__ == "__main__":
         / ising_list[0].lattice.spins
     )
     magnet_data = np.mean([ising.plot.magnet_data for ising in ising_list], axis=0)
-
-    # Creating a dataframe with heating data
-    result = pd.DataFrame(
-        [temp_data, specific_heat_data, magnet_data],
-        index=("temp", "specific_heat", "magnet"),
-    )
-
-    outfile = "data/heating.csv"
-    result.transpose().to_csv(
-        outfile,
-        index=None,
-        float_format="%.3f",
-    )
-
-    print(f"Results saved as {outfile}")
 
     # Ploting heating data
     fig, axes = plt.subplots(1, 2)
