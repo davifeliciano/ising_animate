@@ -34,13 +34,12 @@ parser.add_argument(
     "-j",
     "--j-value",
     type=float,
-    nargs="+",
-    default=[1.0],
+    nargs=2,
+    default=[1.0, 1.0],
     metavar=("J_ROW", "J_COL"),
     help="the coefficient of interaction between neighboring spins on the lattice. "
-    "If a pair of values is given, the first will dictate the interaction "
-    "between row neighbors, and the second, the interaction between column neighbors. "
-    "Default is (1.0, 1.0).",
+    "The first will dictate the interaction between row neighbors, and the second, "
+    "the interaction between column neighbors. Default is (1.0, 1.0).",
 )
 
 parser.add_argument(
@@ -92,6 +91,19 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "-c",
+    "--cooling",
+    type=float,
+    nargs=3,
+    default=[5.0, 1.0, 0.6],
+    metavar=("INIT_TEMP", "FINAL_TEMP", "COOL_RATE"),
+    help="if provided, the temperature of the system will evolve acording to the "
+    "function T(t) = [FINAL_TEMP] + ([INIT_TEMP] - [FINAL_TEMP]) * exp(- [COOL_RATE] * t). "
+    "Final temperature is not required to be smaller than initial temperature. "
+    "This option overwrites the option --temp. Default is (5.0, 1.0, 0.6).",
+)
+
+parser.add_argument(
     "-o",
     "--output",
     type=str,
@@ -103,39 +115,55 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-shape = (args.size, args.size)
-temp = args.temp
-
-try:
-    j_value = args.j_value[0], args.j_value[1]
-except IndexError:
-    j_value = args.j_value[0]
-
-field = args.field
-init_state = args.init_state
-time_series = args.time_series
-interval = args.interval
-frames = args.frames
-output = args.output
-
-extension = os.path.splitext(output)[1]
-if extension.lower() != ".gif":
-    output += ".gif"
-
 
 @timer.timer
 def main():
-    # Creating an AnimatedIsing instance with the given options
-    ani_ising = ising.AnimatedIsing(
-        shape, temp, j_value, field, init_state, time_series, interval, frames
-    )
+    shape = (args.size, args.size)
+    temp = args.temp
+    j_value = args.j_value
+    field = args.field
+    init_state = args.init_state
+    time_series = args.time_series
+    interval = args.interval
+    frames = args.frames
+    output = args.output
+
+    extension = os.path.splitext(output)[1]
+    if extension.lower() != ".gif":
+        output += ".gif"
+
+    if args.cooling:
+        temp, final_temp, cooling_rate = args.cooling
+        ani_ising = ising.CoolingAnimatedIsing(
+            shape,
+            temp,
+            final_temp,
+            cooling_rate,
+            j_value,
+            field,
+            init_state,
+            time_series,
+            interval,
+            frames,
+        )
+    else:
+        ani_ising = ising.AnimatedIsing(
+            shape,
+            temp,
+            j_value,
+            field,
+            init_state,
+            time_series,
+            interval,
+            frames,
+        )
 
     # Saving animation and computing rendering time
     print("Rendering animation...")
     fps = 1000 / interval
     ani_ising.animation.save(output, writer=PillowWriter(fps))
+    print(f"Animation saved as {output}")
 
 
 if __name__ == "__main__":
     main()
-    print(f"Animation saved as {output}")
