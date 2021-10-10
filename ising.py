@@ -1,3 +1,4 @@
+from math import exp
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.colors import Normalize
@@ -44,7 +45,7 @@ class Ising:
 
     def __str__(self) -> str:
         return (
-            f"Ising Model with Temperature {self.lattice.temp} and Field {self.lattice.field}, "
+            f"Ising Model with Temperature {self.lattice.temp:.2f} and Field {self.lattice.field:.2f}, "
             + f"starting with {self.init_state} spins"
         )
 
@@ -127,11 +128,14 @@ class AnimatedIsing(Ising):
 
             self.fig.add_subplot(gridspec[0:2, 0])
             self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+            self.ax.insert(0, self.ax.pop())  # ax[4] is now ax[0]
 
             self.__update_animation = self.__update_ani_time_series
             self.__init_animation = self.__init_ani_time_series
         else:
             self.fig, self.ax = plt.subplots()
+            self.fig.set_size_inches(7.2, 4.8)
+
             self.__update_animation = self.__update_ani_no_time_series
             self.__init_animation = self.__init_ani_no_time_series
 
@@ -176,7 +180,7 @@ class AnimatedIsing(Ising):
         self.time_hist.append(self.time)
 
     def __set_axes(self):
-        for ax in self.ax[:-1]:
+        for ax in self.ax[1:]:
             ax.yaxis.set_major_formatter(StrMethodFormatter("{x:.1e}"))
             ax.set(
                 xlim=(0, self.frames * self.interval / 1000),
@@ -184,11 +188,11 @@ class AnimatedIsing(Ising):
             )
             ax.grid(linestyle=":")
 
-        self.ax[0].set(ylabel=self.axes_labels["energy"])
-        self.ax[1].set(ylabel=self.axes_labels["magnet"])
-        self.ax[2].set(ylabel=self.axes_labels["specific_heat"])
-        self.ax[3].set(ylabel=self.axes_labels["susceptibility"])
-        self.ax[4].set(ylabel="i", xlabel="j")
+        self.ax[0].set(ylabel="i", xlabel="j")
+        self.ax[1].set(ylabel=self.axes_labels["energy"])
+        self.ax[2].set(ylabel=self.axes_labels["magnet"])
+        self.ax[3].set(ylabel=self.axes_labels["specific_heat"])
+        self.ax[4].set(ylabel=self.axes_labels["susceptibility"])
 
     def __init_ani_time_series(self):
         self.ax[4].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
@@ -200,11 +204,12 @@ class AnimatedIsing(Ising):
             ax.clear()
 
         self.__set_axes()
-        self.ax[0].plot(self.time_hist, self.mean_energy_hist, color="purple")
-        self.ax[1].plot(self.time_hist, self.magnet_hist, color="purple")
-        self.ax[2].plot(self.time_hist, self.specific_heat_hist, color="purple")
-        self.ax[3].plot(self.time_hist, self.susceptibility_hist, color="purple")
-        self.ax[4].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.mean_energy_hist, color="purple")
+        self.ax[2].plot(self.time_hist, self.magnet_hist, color="purple")
+        self.ax[3].plot(self.time_hist, self.specific_heat_hist, color="purple")
+        self.ax[4].plot(self.time_hist, self.susceptibility_hist, color="purple")
         self.update()
 
     def __init_ani_no_time_series(self):
@@ -213,12 +218,63 @@ class AnimatedIsing(Ising):
 
     def __update_ani_no_time_series(self, frame):
         self.ax.clear()
+        self.fig.suptitle(self.__str__())
         self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.update()
 
 
+class CoolingAnimatedIsing(AnimatedIsing):
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=5,
+        final_temp=1,
+        cooling_rate=0.5,
+        j=(1, 1),
+        field=0,
+        init_state="random",
+        time_series=False,
+        interval=100,
+        frames=100,
+    ) -> None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp,
+            j=j,
+            field=field,
+            init_state=init_state,
+            time_series=time_series,
+            interval=interval,
+            frames=frames,
+        )
+
+        self._init_temp = abs(float(self.temp))
+        self._final_temp = abs(float(final_temp))
+        self._cooling_rate = abs(float(cooling_rate))
+
+    @property
+    def init_temp(self):
+        return self._init_temp
+
+    @property
+    def final_temp(self):
+        return self._final_temp
+
+    @property
+    def cooling_rate(self):
+        return self._cooling_rate
+
+    def update(self):
+        super().update()
+        self.temp = self.final_temp + (self.init_temp - self.final_temp) * exp(
+            -self.cooling_rate * self.time
+        )
+
+
 if __name__ == "__main__":
-    ising = AnimatedIsing(shape=(128, 128), temp=5.0, init_state="down")
-    ising_time_series = AnimatedIsing(shape=(128, 128), temp=1.5, time_series=True)
+    # ising = DynamicAnimatedIsing(time_series=True)
+    ising = CoolingAnimatedIsing(temp=5.0, final_temp=1.0)
+    ising_time_series = CoolingAnimatedIsing(temp=5.0, final_temp=1.0, time_series=True)
     ising.animation.save("images/test.gif")
     ising_time_series.animation.save("images/test_time_series.gif")
