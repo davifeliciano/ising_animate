@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 import multiprocessing as mp
 import sys
+import arrow
 
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter1d
 
-from ising import Ising
-import timer
+from ..ising import Ising
+from ..timer import timer
 
 
 plt.rcParams.update({"figure.autolayout": True, "figure.figsize": [9.6, 4.8]})
@@ -18,9 +19,9 @@ class PlotData:
     """Class to store data of the evolution of the
     macroscopic quantities during the heating process"""
 
-    temp_data: list[float] = field(default_factory=list)
-    specific_heat_data: list[float] = field(default_factory=list)
-    magnet_data: list[float] = field(default_factory=list)
+    temp_data: "list[float]" = field(default_factory=list)
+    specific_heat_data: "list[float]" = field(default_factory=list)
+    magnet_data: "list[float]" = field(default_factory=list)
 
 
 class HeatingIsing(Ising):
@@ -58,8 +59,10 @@ def update_ising(ising):
         pass
 
 
-@timer.timer
-def heatup_isings(ising_list: list[HeatingIsing], processes: int) -> list[HeatingIsing]:
+@timer
+def heatup_isings(
+    ising_list: "list[HeatingIsing]", processes: int
+) -> "list[HeatingIsing]":
     print(f"Heating up {processes} Ising Models. This may take some time...")
     with mp.Pool(processes) as pool:
         try:
@@ -109,7 +112,8 @@ if __name__ == "__main__":
     for ax in axes:
         ax.grid(linestyle=":")
 
-    fig_outfile = "images/heating.png"
+    time_string = arrow.now().format("YYYY-MM-DD_HH:mm")
+    fig_outfile = f"heating_{time_string}.png"
     print(f"Figure saved as {fig_outfile}")
     fig.savefig(fig_outfile)
     plt.show()

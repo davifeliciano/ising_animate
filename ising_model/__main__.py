@@ -4,8 +4,8 @@ from matplotlib.animation import PillowWriter
 import progressbar
 import arrow
 
-import ising
-import timer
+from .ising import AnimatedIsing, CoolingAnimatedIsing
+from .timer import timer
 
 # Creating and parsing the cl arguments
 parser = argparse.ArgumentParser(
@@ -120,7 +120,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-@timer.timer
+@timer
 def main():
     shape = (args.size, args.size)
     temp = args.temp
@@ -138,7 +138,7 @@ def main():
 
     if args.cooling:
         temp, final_temp, cooling_rate = args.cooling
-        ani_ising = ising.CoolingAnimatedIsing(
+        ani_ising = CoolingAnimatedIsing(
             shape,
             temp,
             final_temp,
@@ -151,7 +151,7 @@ def main():
             frames,
         )
     else:
-        ani_ising = ising.AnimatedIsing(
+        ani_ising = AnimatedIsing(
             shape,
             temp,
             j_value,

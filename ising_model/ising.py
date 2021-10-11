@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation
 from matplotlib.colors import Normalize
 from matplotlib.ticker import StrMethodFormatter
 
-from lattice import Lattice
+from .lattice import Lattice
 
 plt.rcParams.update({"figure.autolayout": True})
 
