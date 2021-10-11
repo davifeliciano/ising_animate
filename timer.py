@@ -5,8 +5,13 @@ def to_string(seconds: float) -> str:
     if seconds >= 60:
         minutes = int(seconds / 60)
         seconds = int(seconds % 60)
-        return f"{minutes} minutes and {seconds} seconds"
-    return f"{seconds:.2f} seconds"
+        return (
+            f"{minutes} {'minute' if minutes == 1 else 'minutes'} and "
+            f"{seconds} {'second' if seconds == 1 else 'seconds'}"
+        )
+    elif seconds == 1:
+        return
+    return f"{seconds:.2f} {'second' if seconds == 1 else 'seconds'}"
 
 
 def timer(func):
