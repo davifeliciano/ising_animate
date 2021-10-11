@@ -30,10 +30,10 @@ class Ising:
         self.lattice = Lattice(shape, temp, j, field, init_state)
         self._energy = self.lattice.energy
         self._mag_mom = self.lattice.mag_mom
-        self.mean_energy_hist = []
-        self.magnet_hist = []
-        self.specific_heat_hist = []
-        self.susceptibility_hist = []
+        self.mean_energy_hist = [self.lattice.mean_energy()]
+        self.magnet_hist = [self.lattice.magnet() / self.spins]
+        self.specific_heat_hist = [0.0]
+        self.susceptibility_hist = [0.0]
 
     def __repr__(self) -> str:
         return (
@@ -86,11 +86,11 @@ class Ising:
         return self.lattice.mag_mom
 
     def update(self):
+        self.lattice.update()
         self.mean_energy_hist.append(self.lattice.mean_energy())
         self.magnet_hist.append(self.lattice.magnet() / self.spins)
         self.specific_heat_hist.append(self.lattice.specific_heat() / self.spins)
         self.susceptibility_hist.append(self.lattice.susceptibility())
-        self.lattice.update()
 
 
 class AnimatedIsing(Ising):
@@ -115,7 +115,6 @@ class AnimatedIsing(Ising):
         )
 
         self.time_series = bool(time_series)
-        self.time_hist = []
 
         if self.time_series:
             self.fig, self.ax = plt.subplots(3, 2)
@@ -143,6 +142,8 @@ class AnimatedIsing(Ising):
 
         self.interval = interval
         self.frames = frames
+
+        self.time_hist = [self.time]
 
         self.animation = FuncAnimation(
             self.fig,
@@ -195,14 +196,14 @@ class AnimatedIsing(Ising):
         self.ax[4].set(ylabel=self.axes_labels["susceptibility"])
 
     def __init_ani_time_series(self):
-        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.__set_axes()
-        self.update()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
 
     def __update_ani_time_series(self, frame):
         for ax in self.ax:
             ax.clear()
 
+        self.update()
         self.__set_axes()
         self.fig.suptitle(self.__str__())
         self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
@@ -210,17 +211,17 @@ class AnimatedIsing(Ising):
         self.ax[2].plot(self.time_hist, self.magnet_hist, color="purple")
         self.ax[3].plot(self.time_hist, self.specific_heat_hist, color="purple")
         self.ax[4].plot(self.time_hist, self.susceptibility_hist, color="purple")
-        self.update()
 
     def __init_ani_no_time_series(self):
+        self.ax.set(ylabel="i", xlabel="j")
         self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
-        self.update()
 
     def __update_ani_no_time_series(self, frame):
         self.ax.clear()
+        self.update()
+        self.ax.set(ylabel="i", xlabel="j")
         self.fig.suptitle(self.__str__())
         self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
-        self.update()
 
 
 class CoolingAnimatedIsing(AnimatedIsing):
@@ -298,10 +299,6 @@ class DynamicAnimatedIsing(Ising):
 
         self.time_series = bool(time_series)
 
-        self.time_hist = []
-        self.temp_hist = []
-        self.field_hist = []
-
         if self.time_series:
             self.fig, self.ax = plt.subplots(4, 2)
             self.fig.set_size_inches(10.8, 9.6)
@@ -338,6 +335,10 @@ class DynamicAnimatedIsing(Ising):
         self.interval = interval
         self.frames = frames
 
+        self.time_hist = [self.time]
+        self.temp_hist = [self.temp]
+        self.field_hist = [self.field]
+
         self.animation = FuncAnimation(
             self.fig,
             func=self.__update_animation,
@@ -372,12 +373,12 @@ class DynamicAnimatedIsing(Ising):
         return self.gen * self.interval / 1000
 
     def update(self):
+        self.temp = self.temp_func(self.time)
+        self.field = self.field_func(self.time)
         super().update()
         self.time_hist.append(self.time)
         self.temp_hist.append(self.temp)
         self.field_hist.append(self.field)
-        self.temp = self.temp_func(self.time)
-        self.field = self.field_func(self.time)
 
     def __set_axes_time_series(self):
         for ax in self.ax[1:]:
@@ -397,14 +398,14 @@ class DynamicAnimatedIsing(Ising):
         self.ax[6].set(ylabel=self.axes_labels["field"])
 
     def __init_ani_time_series(self):
-        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.__set_axes_time_series()
-        self.update()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
 
     def __update_ani_time_series(self, frame):
         for ax in self.ax:
             ax.clear()
 
+        self.update()
         self.__set_axes_time_series()
         self.fig.suptitle(self.__str__())
         self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
@@ -414,7 +415,6 @@ class DynamicAnimatedIsing(Ising):
         self.ax[4].plot(self.time_hist, self.susceptibility_hist, color="purple")
         self.ax[5].plot(self.time_hist, self.temp_hist, color="purple")
         self.ax[6].plot(self.time_hist, self.field_hist, color="purple")
-        self.update()
 
     def __set_axes_no_time_series(self):
         for ax in self.ax[1:]:
@@ -430,26 +430,59 @@ class DynamicAnimatedIsing(Ising):
         self.ax[2].set(ylabel=self.axes_labels["field"])
 
     def __init_ani_no_time_series(self):
-        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.__set_axes_no_time_series()
-        self.update()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
 
     def __update_ani_no_time_series(self, frame):
         for ax in self.ax:
             ax.clear()
 
+        self.update()
         self.__set_axes_no_time_series()
         self.fig.suptitle(self.__str__())
         self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.ax[1].plot(self.time_hist, self.temp_hist, color="purple")
         self.ax[2].plot(self.time_hist, self.field_hist, color="purple")
-        self.update()
 
 
 if __name__ == "__main__":
-    ising = DynamicAnimatedIsing(shape=(256, 256))
-    ising_time_series = DynamicAnimatedIsing(
-        shape=(256, 256), time_series=True, frames=200
+    import progressbar
+
+    shape = (16, 16)
+    frames = 100
+    ising = AnimatedIsing(shape=shape, time_series=True, frames=frames)
+    cooling = CoolingAnimatedIsing(
+        shape=shape,
+        temp=5.0,
+        final_temp=1.0,
+        time_series=True,
+        frames=frames,
     )
-    ising.animation.save("images/test.gif")
-    ising_time_series.animation.save("images/test_time_series.gif")
+    dynamic = DynamicAnimatedIsing(
+        shape=shape,
+        temp=lambda t: 1.0 + 0.2 * t,
+        field=lambda t: 0.0,
+        time_series=True,
+        frames=frames,
+    )
+
+    print(f"Saving {ising.__repr__()} as images/test_ising.gif")
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        ising.animation.save(
+            "images/test_ising.gif",
+            progress_callback=lambda i, n: bar.update(i),
+        )
+
+    print(f"Saving {ising.__repr__()} as images/test_cooling.gif")
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        cooling.animation.save(
+            "images/test_cooling.gif",
+            progress_callback=lambda i, n: bar.update(i),
+        )
+
+    print(f"Saving {ising.__repr__()} as images/test_dynamic.gif")
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        dynamic.animation.save(
+            "images/test_dynamic.gif",
+            progress_callback=lambda i, n: bar.update(i),
+        )
