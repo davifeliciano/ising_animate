@@ -1,6 +1,8 @@
 import os
 import argparse
 from matplotlib.animation import PillowWriter
+import progressbar
+import arrow
 
 import ising
 import timer
@@ -103,14 +105,16 @@ parser.add_argument(
     "This option overwrites the option --temp. Default is (5.0, 1.0, 0.6).",
 )
 
+time_string = arrow.now().format("YYYY-MM-DD_HH-mm-ss")
+
 parser.add_argument(
     "-o",
     "--output",
     type=str,
     nargs="?",
-    default="images/ising.gif",
-    const="images/ising.gif",
-    help='name of the output file. Default is "images/ising.gif".',
+    default=f"ising_{time_string}.gif",
+    const=f"ising_{time_string}.gif",
+    help='name of the output file. Default is "[DATE]_[TIME].gif".',
 )
 
 args = parser.parse_args()
@@ -161,7 +165,12 @@ def main():
     # Saving animation and computing rendering time
     print("Rendering animation...")
     fps = 1000 / interval
-    ani_ising.animation.save(output, writer=PillowWriter(fps))
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        ani_ising.animation.save(
+            output,
+            writer=PillowWriter(fps),
+            progress_callback=lambda i, n: bar.update(i),
+        )
     print(f"Animation saved as {output}")
 
 
