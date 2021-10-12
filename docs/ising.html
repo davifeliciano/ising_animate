@@ -1,0 +1,2519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>ising_animate.ising API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>ising_animate.ising</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from math import exp, sin
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from matplotlib.colors import Normalize
+from matplotlib.ticker import StrMethodFormatter
+
+from .lattice import Lattice
+
+plt.rcParams.update({&#34;figure.autolayout&#34;: True})
+
+
+class Ising:
+    &#34;&#34;&#34;
+    The core implementation of the Ising Model. No animation here.
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float; Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float; Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2.0,
+        j=(1.0, 1.0),
+        field=0.0,
+        init_state=&#34;random&#34;,
+    ) -&gt; None:
+
+        # Saving given init_state to include in __str__
+        if init_state == &#34;up&#34;:
+            self._init_state = &#34;up&#34;
+        elif init_state == &#34;down&#34;:
+            self._init_state = &#34;down&#34;
+        else:
+            self._init_state = &#34;random&#34;
+
+        self.lattice = Lattice(shape, temp, j, field, init_state)
+        self._energy = self.lattice.energy
+        self._mag_mom = self.lattice.mag_mom
+        self.mean_energy_hist = [self.lattice.mean_energy()]
+        self.magnet_hist = [self.lattice.magnet() / self.spins]
+        self.specific_heat_hist = [0.0]
+        self.susceptibility_hist = [0.0]
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;Ising(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.lattice.temp}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.lattice.field})&#34;
+        )
+
+    def __str__(self) -&gt; str:
+        return (
+            f&#34;Ising Model with Temperature {self.lattice.temp:.2f} and Field {self.lattice.field:.2f}, &#34;
+            + f&#34;starting with {self.init_state} spins&#34;
+        )
+
+    @property
+    def spins(self):
+        return self.lattice.spins
+
+    @property
+    def init_state(self):
+        return self._init_state
+
+    @property
+    def gen(self):
+        return self.lattice._gen
+
+    @property
+    def temp(self):
+        return self.lattice.temp
+
+    @temp.setter
+    def temp(self, value):
+        self.lattice.temp = value
+
+    @property
+    def field(self):
+        return self.lattice.field
+
+    @field.setter
+    def field(self, value):
+        self.lattice.field = value
+
+    @property
+    def energy(self):
+        return self.lattice.energy
+
+    @property
+    def mag_mom(self):
+        return self.lattice.mag_mom
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity.
+        &#34;&#34;&#34;
+        self.lattice.update()
+        self.mean_energy_hist.append(self.lattice.mean_energy())
+        self.magnet_hist.append(self.lattice.magnet() / self.spins)
+        self.specific_heat_hist.append(self.lattice.specific_heat() / self.spins)
+        self.susceptibility_hist.append(self.lattice.susceptibility())
+
+
+class AnimatedIsing(Ising):
+    &#34;&#34;&#34;
+    Animation of the Ising Model at constant temperature and
+    constant external magnetic field
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints. Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float. Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats. Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float. Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}. Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    interval : int
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int.
+        the number of frames to include in the animation
+
+    time : float
+        elapsed time, considering one update per frame
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    time_hist : list[float]
+        a list with the values of time for each past generation.
+        New values are appended by a call to the update function
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2,
+        j=(1, 1),
+        field=0,
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=60,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp,
+            j=j,
+            field=field,
+            init_state=init_state,
+        )
+
+        self.time_series = bool.Default is False(time_series)
+
+        if self.time_series:
+            self.fig, self.ax = plt.subplots(3, 2)
+            self.fig.set_size_inches(10.8, 7.2)
+
+            # Merging axis [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[0:2, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[0:2, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+            self.ax.insert(0, self.ax.pop())  # ax[4] is now ax[0]
+
+            self.__update_animation = self.__update_ani_time_series
+            self.__init_animation = self.__init_ani_time_series
+        else:
+            self.fig, self.ax = plt.subplots()
+            self.fig.set_size_inches(7.2, 4.8)
+
+            self.__update_animation = self.__update_ani_no_time_series
+            self.__init_animation = self.__init_ani_no_time_series
+
+        self.fig.suptitle(self.__str__())
+
+        self.interval = interval
+        self.frames = frames
+
+        self.time_hist = [self.time]
+
+        self.animation = FuncAnimation(
+            self.fig,
+            func=self.__update_animation,
+            init_func=self.__init_animation,
+            interval=self.interval,
+            save_count=self.frames,
+        )
+
+        self.axes_labels = {
+            &#34;time&#34;: r&#34;$t$&#34;,
+            &#34;energy&#34;: r&#34;$\langle E \rangle$&#34;,
+            &#34;magnet&#34;: r&#34;$\langle \mu \rangle / n$&#34;,
+            &#34;specific_heat&#34;: r&#34;$C / n$&#34;,
+            &#34;susceptibility&#34;: r&#34;$\chi$&#34;,
+        }
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;AnimatedIsing(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.lattice.temp}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.lattice.field}, &#34;
+            + f&#34;time_series={self.time_series}, &#34;
+            + f&#34;interval={self.interval}, &#34;
+            + f&#34;frames={self.frames})&#34;
+        )
+
+    @property
+    def time(self):
+        return self.gen * self.interval / 1000
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        super().update()
+        self.time_hist.append(self.time)
+
+    def __set_axes(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;energy&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;magnet&#34;])
+        self.ax[3].set(ylabel=self.axes_labels[&#34;specific_heat&#34;])
+        self.ax[4].set(ylabel=self.axes_labels[&#34;susceptibility&#34;])
+
+    def __init_ani_time_series(self):
+        self.__set_axes()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.mean_energy_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.magnet_hist, color=&#34;purple&#34;)
+        self.ax[3].plot(self.time_hist, self.specific_heat_hist, color=&#34;purple&#34;)
+        self.ax[4].plot(self.time_hist, self.susceptibility_hist, color=&#34;purple&#34;)
+
+    def __init_ani_no_time_series(self):
+        self.ax.set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_no_time_series(self, frame):
+        self.ax.clear()
+        self.update()
+        self.ax.set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.fig.suptitle(self.__str__())
+        self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+
+class CoolingAnimatedIsing(AnimatedIsing):
+    &#34;&#34;&#34;
+    Animation of the Ising Model at constant external magnetic field,
+    but with its temperature growing (or decaing) exponentially, given
+    initial and target values.
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints
+        the shape of the lattice of spins. Default is (128, 128).
+
+    temp : float. Default is 5.0
+        the initial temperature of the lattice as a whole.
+
+    final_temp : float. Default is 1.0
+        the final temperature of the system.
+
+    cooling_rate : float. Default is 0.5
+        the rate with which the temperature will find its way to the final_temp.
+        (1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+        63% of the way there.
+
+    j : float or 2-tuple of floats. Default is (1.0, 1.0)
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float. Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}. Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    init_temp : float
+        the initial temperature of the lattice as a whole.
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    final_temp : float
+        the final temperature of the system.
+
+    cooling_rate : float
+        the rate with which the temperature will find its way to the final_temp.
+        (1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+        63% of the way there.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=5,
+        final_temp=1,
+        cooling_rate=0.5,
+        j=(1, 1),
+        field=0,
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=100,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp,
+            j=j,
+            field=field,
+            init_state=init_state,
+            time_series=time_series,
+            interval=interval,
+            frames=frames,
+        )
+
+        self._init_temp = abs(float(self.temp))
+        self._final_temp = abs(float(final_temp))
+        self._cooling_rate = abs(float(cooling_rate))
+
+    @property
+    def init_temp(self):
+        return self._init_temp
+
+    @property
+    def final_temp(self):
+        return self._final_temp
+
+    @property
+    def cooling_rate(self):
+        return self._cooling_rate
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        super().update()
+        self.temp = self.final_temp + (self.init_temp - self.final_temp) * exp(
+            -self.cooling_rate * self.time
+        )
+
+
+class DynamicAnimatedIsing(Ising):
+    &#34;&#34;&#34;
+    Animation of the Ising Model with both temperature and external magnetic
+    field varying as functions of time
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : callable; Default is lambda t: 2.0
+        a real valued one variable function that describes the temperature in
+        the interval [0, interval * frames / 1000]
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : callable; Default is lambda t: math.sin(t)
+        a real valued one variable function that describes the external
+        magnetic field in the interval [0, interval * frames / 1000]
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    temp_func : callable
+        the function passed as temp to the constructor
+
+    field_func : callable
+        the function passed as field to the constructor
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp: callable = lambda t: 2.0,
+        j=(1, 1),
+        field: callable = lambda t: sin(t),
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=60,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp(0),
+            j=j,
+            field=field(0),
+            init_state=init_state,
+        )
+
+        self.temp_func = temp
+        self.field_func = field
+
+        self.time_series = bool(time_series)
+
+        if self.time_series:
+            self.fig, self.ax = plt.subplots(4, 2)
+            self.fig.set_size_inches(10.8, 9.6)
+
+            # Merging axis [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[0:2, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[0:2, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+            self.ax.insert(0, self.ax.pop())  # ax[4] is now ax[0]
+
+            self.__update_animation = self.__update_ani_time_series
+            self.__init_animation = self.__init_ani_time_series
+        else:
+            self.fig, self.ax = plt.subplots(2, 2)
+            self.fig.set_size_inches(10.8, 4.8)
+
+            # Merging axes [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[:, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[:, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[2]
+            self.ax.insert(0, self.ax.pop())  # ax[2] is now ax[0]
+
+            self.__update_animation = self.__update_ani_no_time_series
+            self.__init_animation = self.__init_ani_no_time_series
+
+        self.fig.suptitle(self.__str__())
+
+        self.interval = interval
+        self.frames = frames
+
+        self.time_hist = [self.time]
+        self.temp_hist = [self.temp]
+        self.field_hist = [self.field]
+
+        self.animation = FuncAnimation(
+            self.fig,
+            func=self.__update_animation,
+            init_func=self.__init_animation,
+            interval=self.interval,
+            save_count=self.frames,
+        )
+
+        self.axes_labels = {
+            &#34;time&#34;: r&#34;$t$&#34;,
+            &#34;energy&#34;: r&#34;$\langle E \rangle$&#34;,
+            &#34;magnet&#34;: r&#34;$\langle \mu \rangle / n$&#34;,
+            &#34;specific_heat&#34;: r&#34;$C / n$&#34;,
+            &#34;susceptibility&#34;: r&#34;$\chi$&#34;,
+            &#34;temp&#34;: r&#34;$T$&#34;,
+            &#34;field&#34;: r&#34;$H_z$&#34;,
+        }
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;DynamicAnimatedIsing(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.temp_func.__name__}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.field_func.__name__}, &#34;
+            + f&#34;time_series={self.time_series}, &#34;
+            + f&#34;interval={self.interval}, &#34;
+            + f&#34;frames={self.frames})&#34;
+        )
+
+    @property
+    def time(self):
+        return self.gen * self.interval / 1000
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        self.temp = self.temp_func(self.time)
+        self.field = self.field_func(self.time)
+        super().update()
+        self.time_hist.append(self.time)
+        self.temp_hist.append(self.temp)
+        self.field_hist.append(self.field)
+
+    def __set_axes_time_series(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;energy&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;magnet&#34;])
+        self.ax[3].set(ylabel=self.axes_labels[&#34;specific_heat&#34;])
+        self.ax[4].set(ylabel=self.axes_labels[&#34;susceptibility&#34;])
+        self.ax[5].set(ylabel=self.axes_labels[&#34;temp&#34;])
+        self.ax[6].set(ylabel=self.axes_labels[&#34;field&#34;])
+
+    def __init_ani_time_series(self):
+        self.__set_axes_time_series()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes_time_series()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.mean_energy_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.magnet_hist, color=&#34;purple&#34;)
+        self.ax[3].plot(self.time_hist, self.specific_heat_hist, color=&#34;purple&#34;)
+        self.ax[4].plot(self.time_hist, self.susceptibility_hist, color=&#34;purple&#34;)
+        self.ax[5].plot(self.time_hist, self.temp_hist, color=&#34;purple&#34;)
+        self.ax[6].plot(self.time_hist, self.field_hist, color=&#34;purple&#34;)
+
+    def __set_axes_no_time_series(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;temp&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;field&#34;])
+
+    def __init_ani_no_time_series(self):
+        self.__set_axes_no_time_series()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_no_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes_no_time_series()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.temp_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.field_hist, color=&#34;purple&#34;)
+
+
+if __name__ == &#34;__main__&#34;:
+    import progressbar
+
+    shape = (16, 16)
+    frames = 100
+    ising = AnimatedIsing(shape=shape, time_series=True, frames=frames)
+    cooling = CoolingAnimatedIsing(
+        shape=shape,
+        temp=5.0,
+        final_temp=1.0,
+        time_series=True,
+        frames=frames,
+    )
+    dynamic = DynamicAnimatedIsing(
+        shape=shape,
+        temp=lambda t: 1.0 + 0.2 * t,
+        field=lambda t: 0.0,
+        time_series=True,
+        frames=frames,
+    )
+
+    print(f&#34;Saving {ising.__repr__()} as images/test_ising.gif&#34;)
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        ising.animation.save(
+            &#34;images/test_ising.gif&#34;,
+            progress_callback=lambda i, n: bar.update(i),
+        )
+
+    print(f&#34;Saving {ising.__repr__()} as images/test_cooling.gif&#34;)
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        cooling.animation.save(
+            &#34;images/test_cooling.gif&#34;,
+            progress_callback=lambda i, n: bar.update(i),
+        )
+
+    print(f&#34;Saving {ising.__repr__()} as images/test_dynamic.gif&#34;)
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        dynamic.animation.save(
+            &#34;images/test_dynamic.gif&#34;,
+            progress_callback=lambda i, n: bar.update(i),
+        )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="ising_animate.ising.AnimatedIsing"><code class="flex name class">
+<span>class <span class="ident">AnimatedIsing</span></span>
+<span>(</span><span>shape=(128, 128), temp=2, j=(1, 1), field=0, init_state='random', time_series=False, interval=100, frames=60)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Animation of the Ising Model at constant temperature and
+constant external magnetic field</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>shape</code></strong> :&ensp;<code>2-tuple</code> of <code>ints. Default is (128, 128)</code></dt>
+<dd>the shape of the lattice of spins.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float. Default is 2.0</code></dt>
+<dd>the initial temperature of the lattice as a whole.</dd>
+<dt><strong><code>j</code></strong> :&ensp;<code>float</code> or <code>2-tuple</code> of <code>floats. Default is 1.0</code></dt>
+<dd>the coefficient of interaction between neighboring spins in the lattice.
+when a tuple is suplied, the first value is the coefficient for row neighbors
+and the second value is the coefficient for column neighbors.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float. Default is 0.0</code></dt>
+<dd>the initial value for the external magnetic field.</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}. Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>time_series</code></strong> :&ensp;<code>bool. Default is False</code></dt>
+<dd>wheater or not to include the time series of the macroscopic
+physical quantities in the animation</dd>
+<dt><strong><code>interval</code></strong> :&ensp;<code>int. Default is 100</code></dt>
+<dd>the interval between each frame in the animation, in milliseconds</dd>
+<dt><strong><code>frames</code></strong> :&ensp;<code>int. Default is 60</code></dt>
+<dd>the number of frames to include in the animation</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>gen</code></strong> :&ensp;<code>int</code></dt>
+<dd>the current generation of the system. Starts at 0 and is
+incremented by a call to update method</dd>
+<dt><strong><code>interval</code></strong> :&ensp;<code>int</code></dt>
+<dd>the interval between each frame in the animation, in milliseconds</dd>
+</dl>
+<p>frames : int.
+the number of frames to include in the animation</p>
+<dl>
+<dt><strong><code>time</code></strong> :&ensp;<code>float</code></dt>
+<dd>elapsed time, considering one update per frame</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>spins</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of the spins in the lattice</dd>
+<dt><strong><code>lattice</code></strong> :&ensp;<code>Lattice</code></dt>
+<dd>an instance of a Lattice object that describes the
+current state of the system</dd>
+<dt><strong><code>animation</code></strong> :&ensp;<code>FuncAnimation</code></dt>
+<dd>a matplotlib.animation.FuncAnimation object. The animation is saved
+with a call to animation.save("outfile.gif"). More info at
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html">https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html</a></dd>
+<dt><strong><code>fig</code></strong> :&ensp;<code>Figure</code></dt>
+<dd>a matplotlib.figure.Figure object in which the animation takes place. More info at
+<a href="https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure">https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure</a></dd>
+<dt><strong><code>ax</code></strong> :&ensp;<code>Axes</code> or <code>list</code> of <code>Axes</code></dt>
+<dd>single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+figures in the animation. More info at
+<a href="https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes">https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes</a></dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current temperature of the lattice, in energy units.
+A new value can be assigned anytime.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current value of the external magnetic field, oriented
+perpendicularlly to the lattice. A positive value represents
+a up oriented field. A new value can be assigned anytime.</dd>
+<dt><strong><code>energy</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total energy of the lattice in its current generation.</dd>
+<dt><strong><code>mag_mom</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total magnetic moment of the lattice in its current generation.</dd>
+<dt><strong><code>time_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of time for each past generation.
+New values are appended by a call to the update function</dd>
+<dt><strong><code>mean_energy_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the mean energy for each past generation.
+New values are appended by a call to the update function</dd>
+<dt><strong><code>magnet_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetization per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>specific_heat_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the specific heat per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>susceptibility_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetic susceptibility
+for each past generation. New values are appended by a call to
+the update function</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AnimatedIsing(Ising):
+    &#34;&#34;&#34;
+    Animation of the Ising Model at constant temperature and
+    constant external magnetic field
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints. Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float. Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats. Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float. Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}. Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    interval : int
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int.
+        the number of frames to include in the animation
+
+    time : float
+        elapsed time, considering one update per frame
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    time_hist : list[float]
+        a list with the values of time for each past generation.
+        New values are appended by a call to the update function
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2,
+        j=(1, 1),
+        field=0,
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=60,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp,
+            j=j,
+            field=field,
+            init_state=init_state,
+        )
+
+        self.time_series = bool.Default is False(time_series)
+
+        if self.time_series:
+            self.fig, self.ax = plt.subplots(3, 2)
+            self.fig.set_size_inches(10.8, 7.2)
+
+            # Merging axis [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[0:2, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[0:2, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+            self.ax.insert(0, self.ax.pop())  # ax[4] is now ax[0]
+
+            self.__update_animation = self.__update_ani_time_series
+            self.__init_animation = self.__init_ani_time_series
+        else:
+            self.fig, self.ax = plt.subplots()
+            self.fig.set_size_inches(7.2, 4.8)
+
+            self.__update_animation = self.__update_ani_no_time_series
+            self.__init_animation = self.__init_ani_no_time_series
+
+        self.fig.suptitle(self.__str__())
+
+        self.interval = interval
+        self.frames = frames
+
+        self.time_hist = [self.time]
+
+        self.animation = FuncAnimation(
+            self.fig,
+            func=self.__update_animation,
+            init_func=self.__init_animation,
+            interval=self.interval,
+            save_count=self.frames,
+        )
+
+        self.axes_labels = {
+            &#34;time&#34;: r&#34;$t$&#34;,
+            &#34;energy&#34;: r&#34;$\langle E \rangle$&#34;,
+            &#34;magnet&#34;: r&#34;$\langle \mu \rangle / n$&#34;,
+            &#34;specific_heat&#34;: r&#34;$C / n$&#34;,
+            &#34;susceptibility&#34;: r&#34;$\chi$&#34;,
+        }
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;AnimatedIsing(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.lattice.temp}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.lattice.field}, &#34;
+            + f&#34;time_series={self.time_series}, &#34;
+            + f&#34;interval={self.interval}, &#34;
+            + f&#34;frames={self.frames})&#34;
+        )
+
+    @property
+    def time(self):
+        return self.gen * self.interval / 1000
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        super().update()
+        self.time_hist.append(self.time)
+
+    def __set_axes(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;energy&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;magnet&#34;])
+        self.ax[3].set(ylabel=self.axes_labels[&#34;specific_heat&#34;])
+        self.ax[4].set(ylabel=self.axes_labels[&#34;susceptibility&#34;])
+
+    def __init_ani_time_series(self):
+        self.__set_axes()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.mean_energy_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.magnet_hist, color=&#34;purple&#34;)
+        self.ax[3].plot(self.time_hist, self.specific_heat_hist, color=&#34;purple&#34;)
+        self.ax[4].plot(self.time_hist, self.susceptibility_hist, color=&#34;purple&#34;)
+
+    def __init_ani_no_time_series(self):
+        self.ax.set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_no_time_series(self, frame):
+        self.ax.clear()
+        self.update()
+        self.ax.set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.fig.suptitle(self.__str__())
+        self.ax.imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="ising_animate.ising.Ising" href="#ising_animate.ising.Ising">Ising</a></li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="ising_animate.ising.CoolingAnimatedIsing" href="#ising_animate.ising.CoolingAnimatedIsing">CoolingAnimatedIsing</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ising_animate.ising.AnimatedIsing.time"><code class="name">var <span class="ident">time</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def time(self):
+    return self.gen * self.interval / 1000</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="ising_animate.ising.AnimatedIsing.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the system to the next generation, appending new values to
+the history list of each phisical quantity. This function is automatically
+called by the animation attribute to render the next frame.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self):
+    &#34;&#34;&#34;
+    Updates the system to the next generation, appending new values to
+    the history list of each phisical quantity. This function is automatically
+    called by the animation attribute to render the next frame.
+    &#34;&#34;&#34;
+    super().update()
+    self.time_hist.append(self.time)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="ising_animate.ising.CoolingAnimatedIsing"><code class="flex name class">
+<span>class <span class="ident">CoolingAnimatedIsing</span></span>
+<span>(</span><span>shape=(128, 128), temp=5, final_temp=1, cooling_rate=0.5, j=(1, 1), field=0, init_state='random', time_series=False, interval=100, frames=100)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Animation of the Ising Model at constant external magnetic field,
+but with its temperature growing (or decaing) exponentially, given
+initial and target values.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>shape</code></strong> :&ensp;<code>2-tuple</code> of <code>ints</code></dt>
+<dd>the shape of the lattice of spins. Default is (128, 128).</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float. Default is 5.0</code></dt>
+<dd>the initial temperature of the lattice as a whole.</dd>
+<dt><strong><code>final_temp</code></strong> :&ensp;<code>float. Default is 1.0</code></dt>
+<dd>the final temperature of the system.</dd>
+<dt><strong><code>cooling_rate</code></strong> :&ensp;<code>float. Default is 0.5</code></dt>
+<dd>the rate with which the temperature will find its way to the final_temp.
+(1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+63% of the way there.</dd>
+<dt><strong><code>j</code></strong> :&ensp;<code>float</code> or <code>2-tuple</code> of <code>floats. Default is (1.0, 1.0)</code></dt>
+<dd>the coefficient of interaction between neighboring spins in the lattice.
+when a tuple is suplied, the first value is the coefficient for row neighbors
+and the second value is the coefficient for column neighbors.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float. Default is 0.0</code></dt>
+<dd>the initial value for the external magnetic field.</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}. Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>time_series</code></strong> :&ensp;<code>bool. Default is False</code></dt>
+<dd>wheater or not to include the time series of the macroscopic
+physical quantities in the animation</dd>
+<dt><strong><code>interval</code></strong> :&ensp;<code>int. Default is 100</code></dt>
+<dd>the interval between each frame in the animation, in milliseconds</dd>
+<dt><strong><code>frames</code></strong> :&ensp;<code>int. Default is 60</code></dt>
+<dd>the number of frames to include in the animation</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>gen</code></strong> :&ensp;<code>int</code></dt>
+<dd>the current generation of the system. Starts at 0 and is
+incremented by a call to update method</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>spins</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of the spins in the lattice</dd>
+<dt><strong><code>lattice</code></strong> :&ensp;<code>Lattice</code></dt>
+<dd>an instance of a Lattice object that describes the
+current state of the system</dd>
+<dt><strong><code>animation</code></strong> :&ensp;<code>FuncAnimation</code></dt>
+<dd>a matplotlib.animation.FuncAnimation object. The animation is saved
+with a call to animation.save("outfile.gif"). More info at
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html">https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html</a></dd>
+<dt><strong><code>fig</code></strong> :&ensp;<code>Figure</code></dt>
+<dd>a matplotlib.figure.Figure object in which the animation takes place. More info at
+<a href="https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure">https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure</a></dd>
+<dt><strong><code>ax</code></strong> :&ensp;<code>Axes</code> or <code>list</code> of <code>Axes</code></dt>
+<dd>single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+figures in the animation. More info at
+<a href="https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes">https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes</a></dd>
+<dt><strong><code>init_temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the initial temperature of the lattice as a whole.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current temperature of the lattice, in energy units.
+A new value can be assigned anytime.</dd>
+<dt><strong><code>final_temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the final temperature of the system.</dd>
+<dt><strong><code>cooling_rate</code></strong> :&ensp;<code>float</code></dt>
+<dd>the rate with which the temperature will find its way to the final_temp.
+(1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+63% of the way there.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current value of the external magnetic field, oriented
+perpendicularlly to the lattice. A positive value represents
+a up oriented field. A new value can be assigned anytime.</dd>
+<dt><strong><code>energy</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total energy of the lattice in its current generation.</dd>
+<dt><strong><code>mag_mom</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total magnetic moment of the lattice in its current generation.</dd>
+<dt><strong><code>mean_energy_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the mean energy for each past generation.
+New values are appended by a call to the update function</dd>
+<dt><strong><code>magnet_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetization per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>specific_heat_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the specific heat per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>susceptibility_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetic susceptibility
+for each past generation. New values are appended by a call to
+the update function</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CoolingAnimatedIsing(AnimatedIsing):
+    &#34;&#34;&#34;
+    Animation of the Ising Model at constant external magnetic field,
+    but with its temperature growing (or decaing) exponentially, given
+    initial and target values.
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints
+        the shape of the lattice of spins. Default is (128, 128).
+
+    temp : float. Default is 5.0
+        the initial temperature of the lattice as a whole.
+
+    final_temp : float. Default is 1.0
+        the final temperature of the system.
+
+    cooling_rate : float. Default is 0.5
+        the rate with which the temperature will find its way to the final_temp.
+        (1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+        63% of the way there.
+
+    j : float or 2-tuple of floats. Default is (1.0, 1.0)
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float. Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}. Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    init_temp : float
+        the initial temperature of the lattice as a whole.
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    final_temp : float
+        the final temperature of the system.
+
+    cooling_rate : float
+        the rate with which the temperature will find its way to the final_temp.
+        (1 / cooling_rate) is the amount of time (in seconds) it takes to achieve about
+        63% of the way there.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=5,
+        final_temp=1,
+        cooling_rate=0.5,
+        j=(1, 1),
+        field=0,
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=100,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp,
+            j=j,
+            field=field,
+            init_state=init_state,
+            time_series=time_series,
+            interval=interval,
+            frames=frames,
+        )
+
+        self._init_temp = abs(float(self.temp))
+        self._final_temp = abs(float(final_temp))
+        self._cooling_rate = abs(float(cooling_rate))
+
+    @property
+    def init_temp(self):
+        return self._init_temp
+
+    @property
+    def final_temp(self):
+        return self._final_temp
+
+    @property
+    def cooling_rate(self):
+        return self._cooling_rate
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        super().update()
+        self.temp = self.final_temp + (self.init_temp - self.final_temp) * exp(
+            -self.cooling_rate * self.time
+        )</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="ising_animate.ising.AnimatedIsing" href="#ising_animate.ising.AnimatedIsing">AnimatedIsing</a></li>
+<li><a title="ising_animate.ising.Ising" href="#ising_animate.ising.Ising">Ising</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ising_animate.ising.CoolingAnimatedIsing.cooling_rate"><code class="name">var <span class="ident">cooling_rate</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def cooling_rate(self):
+    return self._cooling_rate</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.CoolingAnimatedIsing.final_temp"><code class="name">var <span class="ident">final_temp</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def final_temp(self):
+    return self._final_temp</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.CoolingAnimatedIsing.init_temp"><code class="name">var <span class="ident">init_temp</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def init_temp(self):
+    return self._init_temp</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="ising_animate.ising.AnimatedIsing" href="#ising_animate.ising.AnimatedIsing">AnimatedIsing</a></b></code>:
+<ul class="hlist">
+<li><code><a title="ising_animate.ising.AnimatedIsing.update" href="#ising_animate.ising.AnimatedIsing.update">update</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="ising_animate.ising.DynamicAnimatedIsing"><code class="flex name class">
+<span>class <span class="ident">DynamicAnimatedIsing</span></span>
+<span>(</span><span>shape=(128, 128), temp: <built-in function callable> = &lt;function DynamicAnimatedIsing.&lt;lambda&gt;&gt;, j=(1, 1), field: <built-in function callable> = &lt;function DynamicAnimatedIsing.&lt;lambda&gt;&gt;, init_state='random', time_series=False, interval=100, frames=60)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Animation of the Ising Model with both temperature and external magnetic
+field varying as functions of time</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>shape</code></strong> :&ensp;<code>2-tuple</code> of <code>ints; Default is (128, 128)</code></dt>
+<dd>the shape of the lattice of spins.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>callable; Default is lambda t: 2.0</code></dt>
+<dd>a real valued one variable function that describes the temperature in
+the interval [0, interval * frames / 1000]</dd>
+<dt><strong><code>j</code></strong> :&ensp;<code>float</code> or <code>2-tuple</code> of <code>floats; Default is 1.0</code></dt>
+<dd>the coefficient of interaction between neighboring spins in the lattice.
+when a tuple is suplied, the first value is the coefficient for row neighbors
+and the second value is the coefficient for column neighbors.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>callable; Default is lambda t: math.sin(t)</code></dt>
+<dd>a real valued one variable function that describes the external
+magnetic field in the interval [0, interval * frames / 1000]</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>time_series</code></strong> :&ensp;<code>bool. Default is False</code></dt>
+<dd>wheater or not to include the time series of the macroscopic
+physical quantities in the animation</dd>
+<dt><strong><code>interval</code></strong> :&ensp;<code>int. Default is 100</code></dt>
+<dd>the interval between each frame in the animation, in milliseconds</dd>
+<dt><strong><code>frames</code></strong> :&ensp;<code>int. Default is 60</code></dt>
+<dd>the number of frames to include in the animation</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>gen</code></strong> :&ensp;<code>int</code></dt>
+<dd>the current generation of the system. Starts at 0 and is
+incremented by a call to update method</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>spins</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of the spins in the lattice</dd>
+<dt><strong><code>lattice</code></strong> :&ensp;<code>Lattice</code></dt>
+<dd>an instance of a Lattice object that describes the
+current state of the system</dd>
+<dt><strong><code>animation</code></strong> :&ensp;<code>FuncAnimation</code></dt>
+<dd>a matplotlib.animation.FuncAnimation object. The animation is saved
+with a call to animation.save("outfile.gif"). More info at
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html">https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html</a></dd>
+<dt><strong><code>fig</code></strong> :&ensp;<code>Figure</code></dt>
+<dd>a matplotlib.figure.Figure object in which the animation takes place. More info at
+<a href="https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure">https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure</a></dd>
+<dt><strong><code>ax</code></strong> :&ensp;<code>Axes</code> or <code>list</code> of <code>Axes</code></dt>
+<dd>single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+figures in the animation. More info at
+<a href="https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes">https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes</a></dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current temperature of the lattice, in energy units.
+A new value can be assigned anytime.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current value of the external magnetic field, oriented
+perpendicularlly to the lattice. A positive value represents
+a up oriented field. A new value can be assigned anytime.</dd>
+<dt><strong><code>temp_func</code></strong> :&ensp;<code>callable</code></dt>
+<dd>the function passed as temp to the constructor</dd>
+<dt><strong><code>field_func</code></strong> :&ensp;<code>callable</code></dt>
+<dd>the function passed as field to the constructor</dd>
+<dt><strong><code>energy</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total energy of the lattice in its current generation.</dd>
+<dt><strong><code>mag_mom</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total magnetic moment of the lattice in its current generation.</dd>
+<dt><strong><code>mean_energy_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the mean energy for each past generation.
+New values are appended by a call to the update function</dd>
+<dt><strong><code>magnet_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetization per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>specific_heat_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the specific heat per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>susceptibility_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetic susceptibility
+for each past generation. New values are appended by a call to
+the update function</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DynamicAnimatedIsing(Ising):
+    &#34;&#34;&#34;
+    Animation of the Ising Model with both temperature and external magnetic
+    field varying as functions of time
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : callable; Default is lambda t: 2.0
+        a real valued one variable function that describes the temperature in
+        the interval [0, interval * frames / 1000]
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : callable; Default is lambda t: math.sin(t)
+        a real valued one variable function that describes the external
+        magnetic field in the interval [0, interval * frames / 1000]
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    time_series : bool. Default is False
+        wheater or not to include the time series of the macroscopic
+        physical quantities in the animation
+
+    interval : int. Default is 100
+        the interval between each frame in the animation, in milliseconds
+
+    frames : int. Default is 60
+        the number of frames to include in the animation
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    animation : FuncAnimation
+        a matplotlib.animation.FuncAnimation object. The animation is saved
+        with a call to animation.save(&#34;outfile.gif&#34;). More info at
+        https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html
+
+    fig : Figure
+        a matplotlib.figure.Figure object in which the animation takes place. More info at
+        https://matplotlib.org/stable/api/figure_api.html?highlight=figure#matplotlib.figure.Figure
+
+    ax : Axes or list of Axes
+        single instance or list of matplotlib.axes.Axes objects. This are the axes in the
+        figures in the animation. More info at
+        https://matplotlib.org/stable/api/axes_api.html?highlight=axes#module-matplotlib.axes
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    temp_func : callable
+        the function passed as temp to the constructor
+
+    field_func : callable
+        the function passed as field to the constructor
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp: callable = lambda t: 2.0,
+        j=(1, 1),
+        field: callable = lambda t: sin(t),
+        init_state=&#34;random&#34;,
+        time_series=False,
+        interval=100,
+        frames=60,
+    ) -&gt; None:
+
+        super().__init__(
+            shape=shape,
+            temp=temp(0),
+            j=j,
+            field=field(0),
+            init_state=init_state,
+        )
+
+        self.temp_func = temp
+        self.field_func = field
+
+        self.time_series = bool(time_series)
+
+        if self.time_series:
+            self.fig, self.ax = plt.subplots(4, 2)
+            self.fig.set_size_inches(10.8, 9.6)
+
+            # Merging axis [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[0:2, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[0:2, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[4]
+            self.ax.insert(0, self.ax.pop())  # ax[4] is now ax[0]
+
+            self.__update_animation = self.__update_ani_time_series
+            self.__init_animation = self.__init_ani_time_series
+        else:
+            self.fig, self.ax = plt.subplots(2, 2)
+            self.fig.set_size_inches(10.8, 4.8)
+
+            # Merging axes [0, 0] and [1, 0]
+            gridspec = self.ax[0, 0].get_gridspec()
+            for ax in self.ax[:, 0]:
+                ax.remove()
+
+            self.fig.add_subplot(gridspec[:, 0])
+            self.ax = self.fig.get_axes()  # ax[0, 0] is now ax[2]
+            self.ax.insert(0, self.ax.pop())  # ax[2] is now ax[0]
+
+            self.__update_animation = self.__update_ani_no_time_series
+            self.__init_animation = self.__init_ani_no_time_series
+
+        self.fig.suptitle(self.__str__())
+
+        self.interval = interval
+        self.frames = frames
+
+        self.time_hist = [self.time]
+        self.temp_hist = [self.temp]
+        self.field_hist = [self.field]
+
+        self.animation = FuncAnimation(
+            self.fig,
+            func=self.__update_animation,
+            init_func=self.__init_animation,
+            interval=self.interval,
+            save_count=self.frames,
+        )
+
+        self.axes_labels = {
+            &#34;time&#34;: r&#34;$t$&#34;,
+            &#34;energy&#34;: r&#34;$\langle E \rangle$&#34;,
+            &#34;magnet&#34;: r&#34;$\langle \mu \rangle / n$&#34;,
+            &#34;specific_heat&#34;: r&#34;$C / n$&#34;,
+            &#34;susceptibility&#34;: r&#34;$\chi$&#34;,
+            &#34;temp&#34;: r&#34;$T$&#34;,
+            &#34;field&#34;: r&#34;$H_z$&#34;,
+        }
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;DynamicAnimatedIsing(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.temp_func.__name__}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.field_func.__name__}, &#34;
+            + f&#34;time_series={self.time_series}, &#34;
+            + f&#34;interval={self.interval}, &#34;
+            + f&#34;frames={self.frames})&#34;
+        )
+
+    @property
+    def time(self):
+        return self.gen * self.interval / 1000
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity. This function is automatically
+        called by the animation attribute to render the next frame.
+        &#34;&#34;&#34;
+        self.temp = self.temp_func(self.time)
+        self.field = self.field_func(self.time)
+        super().update()
+        self.time_hist.append(self.time)
+        self.temp_hist.append(self.temp)
+        self.field_hist.append(self.field)
+
+    def __set_axes_time_series(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;energy&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;magnet&#34;])
+        self.ax[3].set(ylabel=self.axes_labels[&#34;specific_heat&#34;])
+        self.ax[4].set(ylabel=self.axes_labels[&#34;susceptibility&#34;])
+        self.ax[5].set(ylabel=self.axes_labels[&#34;temp&#34;])
+        self.ax[6].set(ylabel=self.axes_labels[&#34;field&#34;])
+
+    def __init_ani_time_series(self):
+        self.__set_axes_time_series()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes_time_series()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.mean_energy_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.magnet_hist, color=&#34;purple&#34;)
+        self.ax[3].plot(self.time_hist, self.specific_heat_hist, color=&#34;purple&#34;)
+        self.ax[4].plot(self.time_hist, self.susceptibility_hist, color=&#34;purple&#34;)
+        self.ax[5].plot(self.time_hist, self.temp_hist, color=&#34;purple&#34;)
+        self.ax[6].plot(self.time_hist, self.field_hist, color=&#34;purple&#34;)
+
+    def __set_axes_no_time_series(self):
+        for ax in self.ax[1:]:
+            ax.yaxis.set_major_formatter(StrMethodFormatter(&#34;{x:.1e}&#34;))
+            ax.set(
+                xlim=(0, self.frames * self.interval / 1000),
+                xlabel=self.axes_labels[&#34;time&#34;],
+            )
+            ax.grid(linestyle=&#34;:&#34;)
+
+        self.ax[0].set(ylabel=&#34;i&#34;, xlabel=&#34;j&#34;)
+        self.ax[1].set(ylabel=self.axes_labels[&#34;temp&#34;])
+        self.ax[2].set(ylabel=self.axes_labels[&#34;field&#34;])
+
+    def __init_ani_no_time_series(self):
+        self.__set_axes_no_time_series()
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+
+    def __update_ani_no_time_series(self, frame):
+        for ax in self.ax:
+            ax.clear()
+
+        self.update()
+        self.__set_axes_no_time_series()
+        self.fig.suptitle(self.__str__())
+        self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
+        self.ax[1].plot(self.time_hist, self.temp_hist, color=&#34;purple&#34;)
+        self.ax[2].plot(self.time_hist, self.field_hist, color=&#34;purple&#34;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="ising_animate.ising.Ising" href="#ising_animate.ising.Ising">Ising</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ising_animate.ising.DynamicAnimatedIsing.time"><code class="name">var <span class="ident">time</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def time(self):
+    return self.gen * self.interval / 1000</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="ising_animate.ising.DynamicAnimatedIsing.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the system to the next generation, appending new values to
+the history list of each phisical quantity. This function is automatically
+called by the animation attribute to render the next frame.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self):
+    &#34;&#34;&#34;
+    Updates the system to the next generation, appending new values to
+    the history list of each phisical quantity. This function is automatically
+    called by the animation attribute to render the next frame.
+    &#34;&#34;&#34;
+    self.temp = self.temp_func(self.time)
+    self.field = self.field_func(self.time)
+    super().update()
+    self.time_hist.append(self.time)
+    self.temp_hist.append(self.temp)
+    self.field_hist.append(self.field)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="ising_animate.ising.Ising"><code class="flex name class">
+<span>class <span class="ident">Ising</span></span>
+<span>(</span><span>shape=(128, 128), temp=2.0, j=(1.0, 1.0), field=0.0, init_state='random')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The core implementation of the Ising Model. No animation here.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>shape</code></strong> :&ensp;<code>2-tuple</code> of <code>ints; Default is (128, 128)</code></dt>
+<dd>the shape of the lattice of spins.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float; Default is 2.0</code></dt>
+<dd>the initial temperature of the lattice as a whole.</dd>
+<dt><strong><code>j</code></strong> :&ensp;<code>float</code> or <code>2-tuple</code> of <code>floats; Default is 1.0</code></dt>
+<dd>the coefficient of interaction between neighboring spins in the lattice.
+when a tuple is suplied, the first value is the coefficient for row neighbors
+and the second value is the coefficient for column neighbors.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float; Default is 0.0</code></dt>
+<dd>the initial value for the external magnetic field.</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>gen</code></strong> :&ensp;<code>int</code></dt>
+<dd>the current generation of the system. Starts at 0 and is
+incremented by a call to update method</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+<dt><strong><code>spins</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of the spins in the lattice</dd>
+<dt><strong><code>lattice</code></strong> :&ensp;<code>Lattice</code></dt>
+<dd>an instance of a Lattice object that describes the
+current state of the system</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current temperature of the lattice, in energy units.
+A new value can be assigned anytime.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current value of the external magnetic field, oriented
+perpendicularlly to the lattice. A positive value represents
+a up oriented field. A new value can be assigned anytime.</dd>
+<dt><strong><code>energy</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total energy of the lattice in its current generation.</dd>
+<dt><strong><code>mag_mom</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total magnetic moment of the lattice in its current generation.</dd>
+<dt><strong><code>mean_energy_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the mean energy for each past generation.
+New values are appended by a call to the update function</dd>
+<dt><strong><code>magnet_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetization per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>specific_heat_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the specific heat per spin
+for each past generation. New values are appended by a call to
+the update function</dd>
+<dt><strong><code>susceptibility_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetic susceptibility
+for each past generation. New values are appended by a call to
+the update function</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Ising:
+    &#34;&#34;&#34;
+    The core implementation of the Ising Model. No animation here.
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float; Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float; Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+
+    Attributes
+    ------------------
+
+    gen : int
+        the current generation of the system. Starts at 0 and is
+        incremented by a call to update method
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    spins : int
+        the number of the spins in the lattice
+
+    lattice : Lattice
+        an instance of a Lattice object that describes the
+        current state of the system
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    mean_energy_hist : list[float]
+        a list with the values of the mean energy for each past generation.
+        New values are appended by a call to the update function
+
+    magnet_hist : list[float]
+        a list with the values of the magnetization per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    specific_heat_hist : list[float]
+        a list with the values of the specific heat per spin
+        for each past generation. New values are appended by a call to
+        the update function
+
+    susceptibility_hist : list[float]
+        a list with the values of the magnetic susceptibility
+        for each past generation. New values are appended by a call to
+        the update function
+
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2.0,
+        j=(1.0, 1.0),
+        field=0.0,
+        init_state=&#34;random&#34;,
+    ) -&gt; None:
+
+        # Saving given init_state to include in __str__
+        if init_state == &#34;up&#34;:
+            self._init_state = &#34;up&#34;
+        elif init_state == &#34;down&#34;:
+            self._init_state = &#34;down&#34;
+        else:
+            self._init_state = &#34;random&#34;
+
+        self.lattice = Lattice(shape, temp, j, field, init_state)
+        self._energy = self.lattice.energy
+        self._mag_mom = self.lattice.mag_mom
+        self.mean_energy_hist = [self.lattice.mean_energy()]
+        self.magnet_hist = [self.lattice.magnet() / self.spins]
+        self.specific_heat_hist = [0.0]
+        self.susceptibility_hist = [0.0]
+
+    def __repr__(self) -&gt; str:
+        return (
+            f&#34;Ising(shape={self.lattice.shape.__str__()}, &#34;
+            + f&#34;temp={self.lattice.temp}, &#34;
+            + f&#34;j={self.lattice.j.__str__()}, &#34;
+            + f&#34;field={self.lattice.field})&#34;
+        )
+
+    def __str__(self) -&gt; str:
+        return (
+            f&#34;Ising Model with Temperature {self.lattice.temp:.2f} and Field {self.lattice.field:.2f}, &#34;
+            + f&#34;starting with {self.init_state} spins&#34;
+        )
+
+    @property
+    def spins(self):
+        return self.lattice.spins
+
+    @property
+    def init_state(self):
+        return self._init_state
+
+    @property
+    def gen(self):
+        return self.lattice._gen
+
+    @property
+    def temp(self):
+        return self.lattice.temp
+
+    @temp.setter
+    def temp(self, value):
+        self.lattice.temp = value
+
+    @property
+    def field(self):
+        return self.lattice.field
+
+    @field.setter
+    def field(self, value):
+        self.lattice.field = value
+
+    @property
+    def energy(self):
+        return self.lattice.energy
+
+    @property
+    def mag_mom(self):
+        return self.lattice.mag_mom
+
+    def update(self):
+        &#34;&#34;&#34;
+        Updates the system to the next generation, appending new values to
+        the history list of each phisical quantity.
+        &#34;&#34;&#34;
+        self.lattice.update()
+        self.mean_energy_hist.append(self.lattice.mean_energy())
+        self.magnet_hist.append(self.lattice.magnet() / self.spins)
+        self.specific_heat_hist.append(self.lattice.specific_heat() / self.spins)
+        self.susceptibility_hist.append(self.lattice.susceptibility())</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="ising_animate.examples.heating.HeatingIsing" href="examples/heating.html#ising_animate.examples.heating.HeatingIsing">HeatingIsing</a></li>
+<li><a title="ising_animate.ising.AnimatedIsing" href="#ising_animate.ising.AnimatedIsing">AnimatedIsing</a></li>
+<li><a title="ising_animate.ising.DynamicAnimatedIsing" href="#ising_animate.ising.DynamicAnimatedIsing">DynamicAnimatedIsing</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ising_animate.ising.Ising.energy"><code class="name">var <span class="ident">energy</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def energy(self):
+    return self.lattice.energy</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.field"><code class="name">var <span class="ident">field</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def field(self):
+    return self.lattice.field</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.gen"><code class="name">var <span class="ident">gen</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def gen(self):
+    return self.lattice._gen</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.init_state"><code class="name">var <span class="ident">init_state</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def init_state(self):
+    return self._init_state</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.mag_mom"><code class="name">var <span class="ident">mag_mom</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def mag_mom(self):
+    return self.lattice.mag_mom</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.spins"><code class="name">var <span class="ident">spins</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def spins(self):
+    return self.lattice.spins</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.ising.Ising.temp"><code class="name">var <span class="ident">temp</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def temp(self):
+    return self.lattice.temp</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="ising_animate.ising.Ising.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the system to the next generation, appending new values to
+the history list of each phisical quantity.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self):
+    &#34;&#34;&#34;
+    Updates the system to the next generation, appending new values to
+    the history list of each phisical quantity.
+    &#34;&#34;&#34;
+    self.lattice.update()
+    self.mean_energy_hist.append(self.lattice.mean_energy())
+    self.magnet_hist.append(self.lattice.magnet() / self.spins)
+    self.specific_heat_hist.append(self.lattice.specific_heat() / self.spins)
+    self.susceptibility_hist.append(self.lattice.susceptibility())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="ising_animate" href="index.html">ising_animate</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="ising_animate.ising.AnimatedIsing" href="#ising_animate.ising.AnimatedIsing">AnimatedIsing</a></code></h4>
+<ul class="">
+<li><code><a title="ising_animate.ising.AnimatedIsing.time" href="#ising_animate.ising.AnimatedIsing.time">time</a></code></li>
+<li><code><a title="ising_animate.ising.AnimatedIsing.update" href="#ising_animate.ising.AnimatedIsing.update">update</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="ising_animate.ising.CoolingAnimatedIsing" href="#ising_animate.ising.CoolingAnimatedIsing">CoolingAnimatedIsing</a></code></h4>
+<ul class="">
+<li><code><a title="ising_animate.ising.CoolingAnimatedIsing.cooling_rate" href="#ising_animate.ising.CoolingAnimatedIsing.cooling_rate">cooling_rate</a></code></li>
+<li><code><a title="ising_animate.ising.CoolingAnimatedIsing.final_temp" href="#ising_animate.ising.CoolingAnimatedIsing.final_temp">final_temp</a></code></li>
+<li><code><a title="ising_animate.ising.CoolingAnimatedIsing.init_temp" href="#ising_animate.ising.CoolingAnimatedIsing.init_temp">init_temp</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="ising_animate.ising.DynamicAnimatedIsing" href="#ising_animate.ising.DynamicAnimatedIsing">DynamicAnimatedIsing</a></code></h4>
+<ul class="">
+<li><code><a title="ising_animate.ising.DynamicAnimatedIsing.time" href="#ising_animate.ising.DynamicAnimatedIsing.time">time</a></code></li>
+<li><code><a title="ising_animate.ising.DynamicAnimatedIsing.update" href="#ising_animate.ising.DynamicAnimatedIsing.update">update</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="ising_animate.ising.Ising" href="#ising_animate.ising.Ising">Ising</a></code></h4>
+<ul class="two-column">
+<li><code><a title="ising_animate.ising.Ising.energy" href="#ising_animate.ising.Ising.energy">energy</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.field" href="#ising_animate.ising.Ising.field">field</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.gen" href="#ising_animate.ising.Ising.gen">gen</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.init_state" href="#ising_animate.ising.Ising.init_state">init_state</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.mag_mom" href="#ising_animate.ising.Ising.mag_mom">mag_mom</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.spins" href="#ising_animate.ising.Ising.spins">spins</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.temp" href="#ising_animate.ising.Ising.temp">temp</a></code></li>
+<li><code><a title="ising_animate.ising.Ising.update" href="#ising_animate.ising.Ising.update">update</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

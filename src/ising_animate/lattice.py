@@ -5,6 +5,79 @@ rng = default_rng()
 
 
 class Lattice:
+    """
+    A Lattice of spins evolving acording to the
+    metropolis algorithm
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float; Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float; Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {"random", "down", "up"}; Default is "random"
+        the initial configuration of the spins in the lattice.
+
+    Attributes
+    ------------------
+
+    rows : int
+        number of rows of spins in the lattice
+
+    cols : int
+        number of columns of spins in the lattice
+
+    spins : int
+        total number of spins in the lattice.
+        The product between rows and cols.
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    state : numpy.ndarray
+        an matrix with values representing the spins of the lattice.
+        -1 represents the down configuration, while +1 represents the up
+        configuration.
+
+    init_state : numpy.ndarray
+        an matrix with values representing the initial configuration
+        of the lattice. -1 represents the down configuration,
+        while +1 represents the up configuration.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    energy_hist : list[float]
+        a list with the values of the total energies of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the mean energy of the lattice.
+
+    mag_mom_hist : list[float]
+        a list with the values of the magnetic moment of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the magnetization of the lattice.
+    """
+
     def __init__(
         self,
         shape=(128, 128),
@@ -76,7 +149,10 @@ class Lattice:
         self._field = float(value)
 
     def element_energy(self, row: int, col: int) -> float:
-        """Returns the energy of a element of the lattice"""
+        """
+        Returns the energy of an element of the lattice,
+        given its row and column.
+        """
         return -self.state[row, col] * (
             self.field
             + self.j_row * self.state[(row + 1) % self.rows, col]
@@ -102,16 +178,24 @@ class Lattice:
         return self.state.sum()
 
     def magnet(self):
-        """Returns the magnetization of the lattice,
-        i. e. the average of mag_mom_hist per spin"""
+        """
+        Returns the magnetization of the lattice,
+        i. e. the average of mag_mom_hist
+        """
         return np.mean(self.mag_mom_hist)
 
     def specific_heat(self):
-        """Returns the specific heat of the lattice"""
+        """
+        Returns the specific heat of the lattice, i. e.
+        the variance of energy_hist
+        """
         return np.var(self.energy_hist) / self.temp ** 2
 
     def susceptibility(self):
-        """Returns the magnetic susceptibility of the lattice"""
+        """
+        Returns the magnetic susceptibility of the lattice, i. e.
+        the variance of the mag_mom_hist divided by the temp
+        """
         return np.var(self.mag_mom_hist) / self.temp
 
     def update(self):

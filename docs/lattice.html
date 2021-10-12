@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>ising_animate.lattice API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>ising_animate.lattice</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+from numpy.random import default_rng
+
+rng = default_rng()
+
+
+class Lattice:
+    &#34;&#34;&#34;
+    A Lattice of spins evolving acording to the
+    metropolis algorithm
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float; Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float; Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    Attributes
+    ------------------
+
+    rows : int
+        number of rows of spins in the lattice
+
+    cols : int
+        number of columns of spins in the lattice
+
+    spins : int
+        total number of spins in the lattice.
+        The product between rows and cols.
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    state : numpy.ndarray
+        an matrix with values representing the spins of the lattice.
+        -1 represents the down configuration, while +1 represents the up
+        configuration.
+
+    init_state : numpy.ndarray
+        an matrix with values representing the initial configuration
+        of the lattice. -1 represents the down configuration,
+        while +1 represents the up configuration.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    energy_hist : list[float]
+        a list with the values of the total energies of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the mean energy of the lattice.
+
+    mag_mom_hist : list[float]
+        a list with the values of the magnetic moment of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the magnetization of the lattice.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2.0,
+        j=(1.0, 1.0),
+        field=0.0,
+        init_state=&#34;random&#34;,
+    ) -&gt; None:
+
+        self._gen = 0
+        rows, cols = shape
+        self._rows, self._cols = self.shape = abs(int(rows)), abs(int(cols))
+
+        temp = abs(float(temp))
+        if temp:
+            self._temp = abs(temp)
+
+        self._field = float(field)
+
+        try:
+            self.j_row, self.j_col = self.j = j
+        except TypeError:
+            self.j_row = self.j_col = self.j = j
+
+        if init_state == &#34;up&#34;:
+            self.state = np.full(shape=self.shape, fill_value=1)
+        elif init_state == &#34;down&#34;:
+            self.state = np.full(shape=self.shape, fill_value=-1)
+        else:
+            self.state = rng.choice((1, -1), size=self.shape)
+        self.init_state = self.state
+
+        self.energy = self.lattice_energy()
+        self.mag_mom = self.lattice_mag_mom()
+        self.energy_hist = [self.energy]
+        self.mag_mom_hist = [self.mag_mom]
+
+    def __repr__(self) -&gt; str:
+        return f&#34;Lattice(shape={self.shape.__str__()}, temp={self.temp}, j={self.j.__str__()}, field={self.field})&#34;
+
+    @property
+    def rows(self):
+        return self._rows
+
+    @property
+    def cols(self):
+        return self._cols
+
+    @property
+    def spins(self):
+        return self.rows * self.cols
+
+    @property
+    def temp(self):
+        return self._temp
+
+    @temp.setter
+    def temp(self, value):
+        temp = abs(value)
+        if temp:
+            self._temp = abs(float(value))
+
+    @property
+    def field(self):
+        return self._field
+
+    @field.setter
+    def field(self, value):
+        self._field = float(value)
+
+    def element_energy(self, row: int, col: int) -&gt; float:
+        &#34;&#34;&#34;
+        Returns the energy of an element of the lattice,
+        given its row and column.
+        &#34;&#34;&#34;
+        return -self.state[row, col] * (
+            self.field
+            + self.j_row * self.state[(row + 1) % self.rows, col]
+            + self.j_row * self.state[(row - 1 + self.rows) % self.rows, col]
+            + self.j_col * self.state[row, (col + 1) % self.cols]
+            + self.j_col * self.state[row, (col - 1 + self.cols) % self.cols]
+        )
+
+    def lattice_energy(self):
+        &#34;&#34;&#34;Returns the total energy of the lattice&#34;&#34;&#34;
+        result = 0
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result += self.element_energy(i, j)
+        return result
+
+    def mean_energy(self):
+        &#34;&#34;&#34;Returns the mean energy of the lattice&#34;&#34;&#34;
+        return np.mean(self.energy_hist)
+
+    def lattice_mag_mom(self):
+        &#34;&#34;&#34;Returns the magnetic moment of the lattice&#34;&#34;&#34;
+        return self.state.sum()
+
+    def magnet(self):
+        &#34;&#34;&#34;
+        Returns the magnetization of the lattice,
+        i. e. the average of mag_mom_hist
+        &#34;&#34;&#34;
+        return np.mean(self.mag_mom_hist)
+
+    def specific_heat(self):
+        &#34;&#34;&#34;
+        Returns the specific heat of the lattice, i. e.
+        the variance of energy_hist
+        &#34;&#34;&#34;
+        return np.var(self.energy_hist) / self.temp ** 2
+
+    def susceptibility(self):
+        &#34;&#34;&#34;
+        Returns the magnetic susceptibility of the lattice, i. e.
+        the variance of the mag_mom_hist divided by the temp
+        &#34;&#34;&#34;
+        return np.var(self.mag_mom_hist) / self.temp
+
+    def update(self):
+        &#34;&#34;&#34;Updates the system using metropolis algorithm&#34;&#34;&#34;
+        self.energy_hist.clear()
+        self.mag_mom_hist.clear()
+        self._gen += 1
+
+        for _ in range(self.spins):
+            # Choose a random spin0 in the lattice
+            i = rng.integers(self.rows)
+            j = rng.integers(self.cols)
+
+            # Compute the change on the internal energy
+            delta_energy = -2 * self.element_energy(i, j)
+
+            if delta_energy &lt;= 0 or rng.random() &lt; np.exp(-delta_energy / self.temp):
+                self.state[i, j] *= -1
+                self.energy += delta_energy
+                self.mag_mom += 2 * self.state[i, j]
+
+            self.energy_hist.append(self.energy)
+            self.mag_mom_hist.append(self.mag_mom)
+
+
+if __name__ == &#34;__main__&#34;:
+    import cProfile
+    import pstats
+
+    with cProfile.Profile() as pr:
+        lattice = Lattice(shape=(15, 15))
+        for i in range(5):
+            lattice.update()
+            print(f&#34;Generation = {i + 1}&#34;, end=&#34;\n\n&#34;)
+            print(
+                f&#34;Energy History = {lattice.energy_hist}&#34;,
+                f&#34;Magnetic Moment = {lattice.mag_mom_hist}&#34;,
+                sep=&#34;\n&#34;,
+                end=&#34;\n\n&#34;,
+            )
+            print(
+                f&#34;Mean Energy = {lattice.mean_energy():.2f}&#34;,
+                f&#34;Magnetization = {lattice.magnet():.2f}&#34;,
+                f&#34;Specific Heat = {lattice.specific_heat():.2f}&#34;,
+                f&#34;Susceptibility = {lattice.susceptibility():.2f}&#34;,
+                sep=&#34;\n&#34;,
+                end=&#34;\n\n&#34;,
+            )
+
+    print(f&#34;Energy History = &#34;)
+
+    stats = pstats.Stats(pr)
+    stats.sort_stats(pstats.SortKey.TIME)
+    stats.print_stats()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="ising_animate.lattice.Lattice"><code class="flex name class">
+<span>class <span class="ident">Lattice</span></span>
+<span>(</span><span>shape=(128, 128), temp=2.0, j=(1.0, 1.0), field=0.0, init_state='random')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A Lattice of spins evolving acording to the
+metropolis algorithm</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>shape</code></strong> :&ensp;<code>2-tuple</code> of <code>ints; Default is (128, 128)</code></dt>
+<dd>the shape of the lattice of spins.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float; Default is 2.0</code></dt>
+<dd>the initial temperature of the lattice as a whole.</dd>
+<dt><strong><code>j</code></strong> :&ensp;<code>float</code> or <code>2-tuple</code> of <code>floats; Default is 1.0</code></dt>
+<dd>the coefficient of interaction between neighboring spins in the lattice.
+when a tuple is suplied, the first value is the coefficient for row neighbors
+and the second value is the coefficient for column neighbors.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float; Default is 0.0</code></dt>
+<dd>the initial value for the external magnetic field.</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>{"random", "down", "up"}; Default is "random"</code></dt>
+<dd>the initial configuration of the spins in the lattice.</dd>
+</dl>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>rows</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of rows of spins in the lattice</dd>
+<dt><strong><code>cols</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of columns of spins in the lattice</dd>
+<dt><strong><code>spins</code></strong> :&ensp;<code>int</code></dt>
+<dd>total number of spins in the lattice.
+The product between rows and cols.</dd>
+<dt><strong><code>temp</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current temperature of the lattice, in energy units.
+A new value can be assigned anytime.</dd>
+<dt><strong><code>field</code></strong> :&ensp;<code>float</code></dt>
+<dd>the current value of the external magnetic field, oriented
+perpendicularlly to the lattice. A positive value represents
+a up oriented field. A new value can be assigned anytime.</dd>
+<dt><strong><code>state</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>an matrix with values representing the spins of the lattice.
+-1 represents the down configuration, while +1 represents the up
+configuration.</dd>
+<dt><strong><code>init_state</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>an matrix with values representing the initial configuration
+of the lattice. -1 represents the down configuration,
+while +1 represents the up configuration.</dd>
+<dt><strong><code>energy</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total energy of the lattice in its current generation.</dd>
+<dt><strong><code>mag_mom</code></strong> :&ensp;<code>float</code></dt>
+<dd>the total magnetic moment of the lattice in its current generation.</dd>
+<dt><strong><code>energy_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the total energies of the lattice during each
+monte carlo step. This list is filled by a call to the update method,
+and its mean value corresponds to the mean energy of the lattice.</dd>
+<dt><strong><code>mag_mom_hist</code></strong> :&ensp;<code>list[float]</code></dt>
+<dd>a list with the values of the magnetic moment of the lattice during each
+monte carlo step. This list is filled by a call to the update method,
+and its mean value corresponds to the magnetization of the lattice.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Lattice:
+    &#34;&#34;&#34;
+    A Lattice of spins evolving acording to the
+    metropolis algorithm
+
+    Args
+    ------------------
+
+    shape : 2-tuple of ints; Default is (128, 128)
+        the shape of the lattice of spins.
+
+    temp : float; Default is 2.0
+        the initial temperature of the lattice as a whole.
+
+    j : float or 2-tuple of floats; Default is 1.0
+        the coefficient of interaction between neighboring spins in the lattice.
+        when a tuple is suplied, the first value is the coefficient for row neighbors
+        and the second value is the coefficient for column neighbors.
+
+    field : float; Default is 0.0
+        the initial value for the external magnetic field.
+
+    init_state : {&#34;random&#34;, &#34;down&#34;, &#34;up&#34;}; Default is &#34;random&#34;
+        the initial configuration of the spins in the lattice.
+
+    Attributes
+    ------------------
+
+    rows : int
+        number of rows of spins in the lattice
+
+    cols : int
+        number of columns of spins in the lattice
+
+    spins : int
+        total number of spins in the lattice.
+        The product between rows and cols.
+
+    temp : float
+        the current temperature of the lattice, in energy units.
+        A new value can be assigned anytime.
+
+    field : float
+        the current value of the external magnetic field, oriented
+        perpendicularlly to the lattice. A positive value represents
+        a up oriented field. A new value can be assigned anytime.
+
+    state : numpy.ndarray
+        an matrix with values representing the spins of the lattice.
+        -1 represents the down configuration, while +1 represents the up
+        configuration.
+
+    init_state : numpy.ndarray
+        an matrix with values representing the initial configuration
+        of the lattice. -1 represents the down configuration,
+        while +1 represents the up configuration.
+
+    energy : float
+        the total energy of the lattice in its current generation.
+
+    mag_mom : float
+        the total magnetic moment of the lattice in its current generation.
+
+    energy_hist : list[float]
+        a list with the values of the total energies of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the mean energy of the lattice.
+
+    mag_mom_hist : list[float]
+        a list with the values of the magnetic moment of the lattice during each
+        monte carlo step. This list is filled by a call to the update method,
+        and its mean value corresponds to the magnetization of the lattice.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        shape=(128, 128),
+        temp=2.0,
+        j=(1.0, 1.0),
+        field=0.0,
+        init_state=&#34;random&#34;,
+    ) -&gt; None:
+
+        self._gen = 0
+        rows, cols = shape
+        self._rows, self._cols = self.shape = abs(int(rows)), abs(int(cols))
+
+        temp = abs(float(temp))
+        if temp:
+            self._temp = abs(temp)
+
+        self._field = float(field)
+
+        try:
+            self.j_row, self.j_col = self.j = j
+        except TypeError:
+            self.j_row = self.j_col = self.j = j
+
+        if init_state == &#34;up&#34;:
+            self.state = np.full(shape=self.shape, fill_value=1)
+        elif init_state == &#34;down&#34;:
+            self.state = np.full(shape=self.shape, fill_value=-1)
+        else:
+            self.state = rng.choice((1, -1), size=self.shape)
+        self.init_state = self.state
+
+        self.energy = self.lattice_energy()
+        self.mag_mom = self.lattice_mag_mom()
+        self.energy_hist = [self.energy]
+        self.mag_mom_hist = [self.mag_mom]
+
+    def __repr__(self) -&gt; str:
+        return f&#34;Lattice(shape={self.shape.__str__()}, temp={self.temp}, j={self.j.__str__()}, field={self.field})&#34;
+
+    @property
+    def rows(self):
+        return self._rows
+
+    @property
+    def cols(self):
+        return self._cols
+
+    @property
+    def spins(self):
+        return self.rows * self.cols
+
+    @property
+    def temp(self):
+        return self._temp
+
+    @temp.setter
+    def temp(self, value):
+        temp = abs(value)
+        if temp:
+            self._temp = abs(float(value))
+
+    @property
+    def field(self):
+        return self._field
+
+    @field.setter
+    def field(self, value):
+        self._field = float(value)
+
+    def element_energy(self, row: int, col: int) -&gt; float:
+        &#34;&#34;&#34;
+        Returns the energy of an element of the lattice,
+        given its row and column.
+        &#34;&#34;&#34;
+        return -self.state[row, col] * (
+            self.field
+            + self.j_row * self.state[(row + 1) % self.rows, col]
+            + self.j_row * self.state[(row - 1 + self.rows) % self.rows, col]
+            + self.j_col * self.state[row, (col + 1) % self.cols]
+            + self.j_col * self.state[row, (col - 1 + self.cols) % self.cols]
+        )
+
+    def lattice_energy(self):
+        &#34;&#34;&#34;Returns the total energy of the lattice&#34;&#34;&#34;
+        result = 0
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result += self.element_energy(i, j)
+        return result
+
+    def mean_energy(self):
+        &#34;&#34;&#34;Returns the mean energy of the lattice&#34;&#34;&#34;
+        return np.mean(self.energy_hist)
+
+    def lattice_mag_mom(self):
+        &#34;&#34;&#34;Returns the magnetic moment of the lattice&#34;&#34;&#34;
+        return self.state.sum()
+
+    def magnet(self):
+        &#34;&#34;&#34;
+        Returns the magnetization of the lattice,
+        i. e. the average of mag_mom_hist
+        &#34;&#34;&#34;
+        return np.mean(self.mag_mom_hist)
+
+    def specific_heat(self):
+        &#34;&#34;&#34;
+        Returns the specific heat of the lattice, i. e.
+        the variance of energy_hist
+        &#34;&#34;&#34;
+        return np.var(self.energy_hist) / self.temp ** 2
+
+    def susceptibility(self):
+        &#34;&#34;&#34;
+        Returns the magnetic susceptibility of the lattice, i. e.
+        the variance of the mag_mom_hist divided by the temp
+        &#34;&#34;&#34;
+        return np.var(self.mag_mom_hist) / self.temp
+
+    def update(self):
+        &#34;&#34;&#34;Updates the system using metropolis algorithm&#34;&#34;&#34;
+        self.energy_hist.clear()
+        self.mag_mom_hist.clear()
+        self._gen += 1
+
+        for _ in range(self.spins):
+            # Choose a random spin0 in the lattice
+            i = rng.integers(self.rows)
+            j = rng.integers(self.cols)
+
+            # Compute the change on the internal energy
+            delta_energy = -2 * self.element_energy(i, j)
+
+            if delta_energy &lt;= 0 or rng.random() &lt; np.exp(-delta_energy / self.temp):
+                self.state[i, j] *= -1
+                self.energy += delta_energy
+                self.mag_mom += 2 * self.state[i, j]
+
+            self.energy_hist.append(self.energy)
+            self.mag_mom_hist.append(self.mag_mom)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ising_animate.lattice.Lattice.cols"><code class="name">var <span class="ident">cols</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def cols(self):
+    return self._cols</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.field"><code class="name">var <span class="ident">field</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def field(self):
+    return self._field</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.rows"><code class="name">var <span class="ident">rows</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def rows(self):
+    return self._rows</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.spins"><code class="name">var <span class="ident">spins</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def spins(self):
+    return self.rows * self.cols</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.temp"><code class="name">var <span class="ident">temp</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def temp(self):
+    return self._temp</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="ising_animate.lattice.Lattice.element_energy"><code class="name flex">
+<span>def <span class="ident">element_energy</span></span>(<span>self, row: int, col: int) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the energy of an element of the lattice,
+given its row and column.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def element_energy(self, row: int, col: int) -&gt; float:
+    &#34;&#34;&#34;
+    Returns the energy of an element of the lattice,
+    given its row and column.
+    &#34;&#34;&#34;
+    return -self.state[row, col] * (
+        self.field
+        + self.j_row * self.state[(row + 1) % self.rows, col]
+        + self.j_row * self.state[(row - 1 + self.rows) % self.rows, col]
+        + self.j_col * self.state[row, (col + 1) % self.cols]
+        + self.j_col * self.state[row, (col - 1 + self.cols) % self.cols]
+    )</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.lattice_energy"><code class="name flex">
+<span>def <span class="ident">lattice_energy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the total energy of the lattice</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lattice_energy(self):
+    &#34;&#34;&#34;Returns the total energy of the lattice&#34;&#34;&#34;
+    result = 0
+    for i in range(self.rows):
+        for j in range(self.cols):
+            result += self.element_energy(i, j)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.lattice_mag_mom"><code class="name flex">
+<span>def <span class="ident">lattice_mag_mom</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the magnetic moment of the lattice</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lattice_mag_mom(self):
+    &#34;&#34;&#34;Returns the magnetic moment of the lattice&#34;&#34;&#34;
+    return self.state.sum()</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.magnet"><code class="name flex">
+<span>def <span class="ident">magnet</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the magnetization of the lattice,
+i. e. the average of mag_mom_hist</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def magnet(self):
+    &#34;&#34;&#34;
+    Returns the magnetization of the lattice,
+    i. e. the average of mag_mom_hist
+    &#34;&#34;&#34;
+    return np.mean(self.mag_mom_hist)</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.mean_energy"><code class="name flex">
+<span>def <span class="ident">mean_energy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the mean energy of the lattice</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mean_energy(self):
+    &#34;&#34;&#34;Returns the mean energy of the lattice&#34;&#34;&#34;
+    return np.mean(self.energy_hist)</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.specific_heat"><code class="name flex">
+<span>def <span class="ident">specific_heat</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the specific heat of the lattice, i. e.
+the variance of energy_hist</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def specific_heat(self):
+    &#34;&#34;&#34;
+    Returns the specific heat of the lattice, i. e.
+    the variance of energy_hist
+    &#34;&#34;&#34;
+    return np.var(self.energy_hist) / self.temp ** 2</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.susceptibility"><code class="name flex">
+<span>def <span class="ident">susceptibility</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the magnetic susceptibility of the lattice, i. e.
+the variance of the mag_mom_hist divided by the temp</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def susceptibility(self):
+    &#34;&#34;&#34;
+    Returns the magnetic susceptibility of the lattice, i. e.
+    the variance of the mag_mom_hist divided by the temp
+    &#34;&#34;&#34;
+    return np.var(self.mag_mom_hist) / self.temp</code></pre>
+</details>
+</dd>
+<dt id="ising_animate.lattice.Lattice.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the system using metropolis algorithm</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self):
+    &#34;&#34;&#34;Updates the system using metropolis algorithm&#34;&#34;&#34;
+    self.energy_hist.clear()
+    self.mag_mom_hist.clear()
+    self._gen += 1
+
+    for _ in range(self.spins):
+        # Choose a random spin0 in the lattice
+        i = rng.integers(self.rows)
+        j = rng.integers(self.cols)
+
+        # Compute the change on the internal energy
+        delta_energy = -2 * self.element_energy(i, j)
+
+        if delta_energy &lt;= 0 or rng.random() &lt; np.exp(-delta_energy / self.temp):
+            self.state[i, j] *= -1
+            self.energy += delta_energy
+            self.mag_mom += 2 * self.state[i, j]
+
+        self.energy_hist.append(self.energy)
+        self.mag_mom_hist.append(self.mag_mom)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="ising_animate" href="index.html">ising_animate</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="ising_animate.lattice.Lattice" href="#ising_animate.lattice.Lattice">Lattice</a></code></h4>
+<ul class="two-column">
+<li><code><a title="ising_animate.lattice.Lattice.cols" href="#ising_animate.lattice.Lattice.cols">cols</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.element_energy" href="#ising_animate.lattice.Lattice.element_energy">element_energy</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.field" href="#ising_animate.lattice.Lattice.field">field</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.lattice_energy" href="#ising_animate.lattice.Lattice.lattice_energy">lattice_energy</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.lattice_mag_mom" href="#ising_animate.lattice.Lattice.lattice_mag_mom">lattice_mag_mom</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.magnet" href="#ising_animate.lattice.Lattice.magnet">magnet</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.mean_energy" href="#ising_animate.lattice.Lattice.mean_energy">mean_energy</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.rows" href="#ising_animate.lattice.Lattice.rows">rows</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.specific_heat" href="#ising_animate.lattice.Lattice.specific_heat">specific_heat</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.spins" href="#ising_animate.lattice.Lattice.spins">spins</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.susceptibility" href="#ising_animate.lattice.Lattice.susceptibility">susceptibility</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.temp" href="#ising_animate.lattice.Lattice.temp">temp</a></code></li>
+<li><code><a title="ising_animate.lattice.Lattice.update" href="#ising_animate.lattice.Lattice.update">update</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
