@@ -97,12 +97,11 @@ parser.add_argument(
     "--cooling",
     type=float,
     nargs=3,
-    default=[5.0, 1.0, 0.6],
     metavar=("INIT_TEMP", "FINAL_TEMP", "COOL_RATE"),
     help="if provided, the temperature of the system will evolve acording to the "
     "function T(t) = [FINAL_TEMP] + ([INIT_TEMP] - [FINAL_TEMP]) * exp(- [COOL_RATE] * t). "
     "Final temperature is not required to be smaller than initial temperature. "
-    "This option overwrites the option --temp. Default is (5.0, 1.0, 0.6).",
+    "This option overwrites the option --temp.",
 )
 
 time_string = arrow.now().format("YYYY-MM-DD_HH-mm-ss")
