@@ -1,6 +1,6 @@
 # ising_animate
 A Python Package to easily generate animations of the [Ising Model](https://en.wikipedia.org/wiki/Ising_model) 
-using the [metropolis algorithm](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm), the most
+using the [Metropolis Algorithm](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm), the most
 commonly used Markov Chain Monte Carlo method to calculate estimations for this system.
 
 ![ising_2021-10-12_15-14-51](https://user-images.githubusercontent.com/26972046/137008265-33f7b181-7047-4afe-b044-ac5f856df73c.gif)
@@ -46,7 +46,7 @@ dynamic = DynamicAnimatedIsing(
     field=lambda t: sin(t),          # external magnetic field as a function of time
     time_series=True,                # plot evolution of physical quantities over time
     interval=100,                    # interval of each frame
-    frames=frames,                      # amount of frames in the animation
+    frames=frames,                   # amount of frames in the animation
 )
 ```
 and the animation itself is now given by a matplotlib [FuncAnimation](https://matplotlib.org/stable/api/_as_gen/matplotlib.animation.FuncAnimation.html)
@@ -63,7 +63,7 @@ the animation. This makes easy to use a package like progressbar2 to show the pr
 ```python
 import progressbar
 
-with progressbar.ProgressBar(max_value=100) as bar:
+with progressbar.ProgressBar(max_value=frames) as bar:
     dynamic.animation.save(
         "outfile.gif",
         fps=10,
