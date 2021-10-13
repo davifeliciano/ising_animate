@@ -219,34 +219,3 @@ class Lattice:
 
             self.energy_hist.append(self.energy)
             self.mag_mom_hist.append(self.mag_mom)
-
-
-if __name__ == "__main__":
-    import cProfile
-    import pstats
-
-    with cProfile.Profile() as pr:
-        lattice = Lattice(shape=(15, 15))
-        for i in range(5):
-            lattice.update()
-            print(f"Generation = {i + 1}", end="\n\n")
-            print(
-                f"Energy History = {lattice.energy_hist}",
-                f"Magnetic Moment = {lattice.mag_mom_hist}",
-                sep="\n",
-                end="\n\n",
-            )
-            print(
-                f"Mean Energy = {lattice.mean_energy():.2f}",
-                f"Magnetization = {lattice.magnet():.2f}",
-                f"Specific Heat = {lattice.specific_heat():.2f}",
-                f"Susceptibility = {lattice.susceptibility():.2f}",
-                sep="\n",
-                end="\n\n",
-            )
-
-    print(f"Energy History = ")
-
-    stats = pstats.Stats(pr)
-    stats.sort_stats(pstats.SortKey.TIME)
-    stats.print_stats()

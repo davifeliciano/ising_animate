@@ -310,7 +310,7 @@ class AnimatedIsing(Ising):
             init_state=init_state,
         )
 
-        self.time_series = bool.Default is False(time_series)
+        self.time_series = bool(time_series)
 
         if self.time_series:
             self.fig, self.ax = plt.subplots(3, 2)
@@ -576,6 +576,19 @@ class CoolingAnimatedIsing(AnimatedIsing):
         self._init_temp = abs(float(self.temp))
         self._final_temp = abs(float(final_temp))
         self._cooling_rate = abs(float(cooling_rate))
+
+    def __repr__(self) -> str:
+        return (
+            f"CoolingAnimatedIsing(shape={self.lattice.shape.__str__()}, "
+            + f"temp={self.lattice.temp}, "
+            + f"final_temp={self.final_temp}, "
+            + f"cooling_rate={self.cooling_rate}, "
+            + f"j={self.lattice.j.__str__()}, "
+            + f"field={self.lattice.field}, "
+            + f"time_series={self.time_series}, "
+            + f"interval={self.interval}, "
+            + f"frames={self.frames})"
+        )
 
     @property
     def init_temp(self):
@@ -886,46 +899,3 @@ class DynamicAnimatedIsing(Ising):
         self.ax[0].imshow(self.lattice.state, norm=Normalize(vmin=-1.0, vmax=1.0))
         self.ax[1].plot(self.time_hist, self.temp_hist, color="purple")
         self.ax[2].plot(self.time_hist, self.field_hist, color="purple")
-
-
-if __name__ == "__main__":
-    import progressbar
-
-    shape = (16, 16)
-    frames = 100
-    ising = AnimatedIsing(shape=shape, time_series=True, frames=frames)
-    cooling = CoolingAnimatedIsing(
-        shape=shape,
-        temp=5.0,
-        final_temp=1.0,
-        time_series=True,
-        frames=frames,
-    )
-    dynamic = DynamicAnimatedIsing(
-        shape=shape,
-        temp=lambda t: 1.0 + 0.2 * t,
-        field=lambda t: 0.0,
-        time_series=True,
-        frames=frames,
-    )
-
-    print(f"Saving {ising.__repr__()} as images/test_ising.gif")
-    with progressbar.ProgressBar(max_value=frames) as bar:
-        ising.animation.save(
-            "images/test_ising.gif",
-            progress_callback=lambda i, n: bar.update(i),
-        )
-
-    print(f"Saving {ising.__repr__()} as images/test_cooling.gif")
-    with progressbar.ProgressBar(max_value=frames) as bar:
-        cooling.animation.save(
-            "images/test_cooling.gif",
-            progress_callback=lambda i, n: bar.update(i),
-        )
-
-    print(f"Saving {ising.__repr__()} as images/test_dynamic.gif")
-    with progressbar.ProgressBar(max_value=frames) as bar:
-        dynamic.animation.save(
-            "images/test_dynamic.gif",
-            progress_callback=lambda i, n: bar.update(i),
-        )
