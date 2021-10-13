@@ -14,6 +14,7 @@ setuptools.setup(
     url="https://github.com/davifeliciano/ising_model",
     project_urls={
         "Bug Tracker": "https://github.com/davi_feliciano/ising_model/issues",
+        "Documentation": "https://davifeliciano.github.io/ising_animate/index.html",
     },
     classifiers=[
         "Programming Language :: Python :: 3",
