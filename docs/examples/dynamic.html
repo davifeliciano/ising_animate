@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>ising_animate.examples API documentation</title>
-<meta name="description" content="An set of examples written with the ising_animate package." />
+<title>ising_animate.examples.dynamic API documentation</title>
+<meta name="description" content="This is a module with an example of usage of the class DynamicAnimatedIsing.
+An animation of an Ising Model with temperature T(t) = 1.0 + 0.3t
+and …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,35 +21,55 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>ising_animate.examples</code></h1>
+<h1 class="title">Module <code>ising_animate.examples.dynamic</code></h1>
 </header>
 <section id="section-intro">
-<p>An set of examples written with the ising_animate package.</p>
+<p>This is a module with an example of usage of the class DynamicAnimatedIsing.
+An animation of an Ising Model with temperature T(t) = 1.0 + 0.3t
+and external magnetic field B(t) = sin(t).</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;
-An set of examples written with the ising_animate package.
-&#34;&#34;&#34;</code></pre>
+This is a module with an example of usage of the class DynamicAnimatedIsing.
+An animation of an Ising Model with temperature T(t) = 1.0 + 0.3t
+and external magnetic field B(t) = sin(t).
+&#34;&#34;&#34;
+from ..ising import DynamicAnimatedIsing
+from math import sin
+import progressbar
+import arrow
+
+if __name__ == &#34;__main__&#34;:
+    frames = 100
+    interval = 100
+    fps = 1000 / interval
+
+    dynamic = DynamicAnimatedIsing(
+        shape=(256, 256),  # the shape of the lattice
+        temp=lambda t: 1.0 + 0.3 * t,  # temperature as a function of time
+        field=lambda t: sin(t),  # external magnetic field as a function of time
+        time_series=True,  # plot evolution of physical quantities over time
+        interval=100,  # interval of each frame
+        frames=frames,  # amount of frames in the animation
+    )
+
+    time_string = arrow.now().format(&#34;YYYY-MM-DD_HH-mm&#34;)
+    fig_outfile = f&#34;dynamic_{time_string}.gif&#34;
+    print(&#34;Rendering animation...&#34;)
+
+    with progressbar.ProgressBar(max_value=frames) as bar:
+        dynamic.animation.save(
+            fig_outfile,
+            fps=fps,
+            progress_callback=lambda i, n: bar.update(i),
+        )
+
+    print(f&#34;Figure saved as {fig_outfile}&#34;)</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
-<dl>
-<dt><code class="name"><a title="ising_animate.examples.dynamic" href="dynamic.html">ising_animate.examples.dynamic</a></code></dt>
-<dd>
-<div class="desc"><p>This is a module with an example of usage of the class DynamicAnimatedIsing.
-An animation of an Ising Model with temperature T(t) = 1.0 + 0.3t
-and …</p></div>
-</dd>
-<dt><code class="name"><a title="ising_animate.examples.heating" href="heating.html">ising_animate.examples.heating</a></code></dt>
-<dd>
-<div class="desc"><p>This is a module with an example of usage of the class Ising.
-In this experiment, a given amount of 32 by 32 Ising models are
-heaten up 0.1 degrees …</p></div>
-</dd>
-</dl>
 </section>
 <section>
 </section>
@@ -64,13 +86,7 @@ heaten up 0.1 degrees …</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="ising_animate" href="../index.html">ising_animate</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="ising_animate.examples.dynamic" href="dynamic.html">ising_animate.examples.dynamic</a></code></li>
-<li><code><a title="ising_animate.examples.heating" href="heating.html">ising_animate.examples.heating</a></code></li>
+<li><code><a title="ising_animate.examples" href="index.html">ising_animate.examples</a></code></li>
 </ul>
 </li>
 </ul>
