@@ -6,7 +6,7 @@ commonly used Markov Chain Monte Carlo method to calculate estimations for this 
 ![ising_2021-10-12_15-14-51](https://user-images.githubusercontent.com/26972046/137008265-33f7b181-7047-4afe-b044-ac5f856df73c.gif)
 ## Installation
 
-Be sure to hav Python 3.6 or newer installed on your machine. Then you can simply use pip to install the package and its dependencies.
+Be sure to have Python 3.6 or newer installed on your machine. Then you can simply use pip to install the package and its dependencies.
 ```
 pip install ising_animate
 ```
@@ -75,3 +75,23 @@ To install progressbar2, use the following command in a terminal.
 pip install progressbar2
 ```
 To view a full description of each class, take a look at the [full documentation](https://davifeliciano.github.io/ising_animate/index.html).
+
+## Examples
+
+There is a subpackage ```ising_animate.examples``` with some usage examples of usage of this library. The example 
+above is one of them, and can be run using 
+
+```
+python -m ising_animate.examples.dynamic
+```
+
+Another interesting one can be run with
+
+```
+python -m ising_animate.examples.heating
+```
+
+which yields two plots with the dependency of the mean energy and the specific heat density with the temperature. 
+This example is a good illustration of the phase thansition that occurs at the temperature of 2.27, in energy units.
+
+![heating_2021-10-26_17-01](https://user-images.githubusercontent.com/26972046/138952988-0d64fb42-d1e0-46ec-b3b8-4755efcbc47d.png)
