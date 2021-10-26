@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as rm:
 
 setuptools.setup(
     name="ising_animate",
-    version="0.0.1",
+    version="0.0.2",
     author="Davi Feliciano",
     author_email="dfeliciano37@gmail.com",
     description="A module to easily generate animations of the Ising Model",
